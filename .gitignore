@@ -1,0 +1,61 @@
+# Ignore Visual Studio temporary files, build results, and
+# user-specific files
+
+## Build Folders ##
+bin/
+obj/
+TestResults/
+packages/
+*.vspscc
+*.vssscc
+.vs/
+
+## User-specific files ##
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## ASP.NET Files ##
+_ReSharper*/
+*.resharper
+*.csproj.user
+*.dbmdl
+*.pdb
+*.cache
+*.log
+
+## IIS Express ##
+.vs/
+*.vsconfig
+*.iisexpress/
+
+## Publish output ##
+publish/
+*.Publish.xml
+
+## Others ##
+*.ncrunch*
+*.dotCover
+*.orig
+*.sdf
+*.cache
+*.suo
+*.bak
+*.swp
+
+## Rider IDE ##
+.idea/
+
+## NuGet ##
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nuget.props
+*.nuget.targets
+
+## Web.Config transforms (optional)
+Web.Debug.config
+Web.Release.config

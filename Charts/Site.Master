@@ -1,0 +1,272 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Charts.SiteMaster" %>
+<%@ Register Assembly="System.Web.DataVisualization" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Analytics Dashboard</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="bg-light">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold text-primary" runat="server" href="~/">
+                    <i class="bi bi-graph-up me-2"></i>Analytics Dashboard
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-bell me-1"></i>Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-person-circle me-1"></i>Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 col-lg-2 px-0 d-flex flex-column">
+                    <div class="bg-white shadow-sm" style="min-height: calc(100vh - 76px);">
+                        <div class="pt-4 pb-4 px-3 flex-grow-1">
+                            <h6 class="text-muted text-uppercase fw-bold mb-3">Navigation</h6>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link text-dark rounded d-flex align-items-center py-2 px-3 bg-primary bg-opacity-10" href="#">
+                                        <i class="bi bi-speedometer2 me-2"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link text-dark rounded d-flex align-items-center py-2 px-3" href="#">
+                                        <i class="bi bi-bar-chart me-2"></i>
+                                        <span>Analytics</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link text-dark rounded d-flex align-items-center py-2 px-3" href="#">
+                                        <i class="bi bi-table me-2"></i>
+                                        <span>Reports</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-md-9 col-lg-10">
+                    <div class="p-4 pb-5">
+                        <!-- Header -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="fw-bold text-dark mb-1">Sales Dashboard</h2>
+                                <p class="text-muted mb-0">Weekly sales performance overview</p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-primary btn-sm">Export</button>
+                                <button class="btn btn-primary btn-sm">Refresh</button>
+                            </div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-3">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <h6 class="text-muted mb-1">Total Sales</h6>
+                                                <h4 class="fw-bold text-success mb-0">$12,450</h4>
+                                            </div>
+                                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
+                                                <i class="bi bi-currency-dollar text-success"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <h6 class="text-muted mb-1">Orders</h6>
+                                                <h4 class="fw-bold text-primary mb-0">185</h4>
+                                            </div>
+                                            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                                                <i class="bi bi-bag text-primary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <h6 class="text-muted mb-1">Customers</h6>
+                                                <h4 class="fw-bold text-info mb-0">89</h4>
+                                            </div>
+                                            <div class="bg-info bg-opacity-10 rounded-circle p-3">
+                                                <i class="bi bi-people text-info"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <h6 class="text-muted mb-1">Growth</h6>
+                                                <h4 class="fw-bold text-success mb-0">+12%</h4>
+                                            </div>
+                                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
+                                                <i class="bi bi-arrow-up text-success"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart Section -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-header bg-white border-bottom">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="fw-bold mb-0">Weekly Sales Performance</h5>
+                                            <small class="text-muted">Last 4 days</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <!-- Chart Container -->
+                                        <div class="chart-container position-relative">
+                                            <asp:Chart ID="SalesChart" runat="server" Width="800px" Height="400px" 
+                                                BackColor="White" BorderlineDashStyle="Solid" BorderlineWidth="1" 
+                                                BorderlineColor="LightGray" Palette="BrightPastel">
+                                                <ChartAreas>
+                                                    <asp:ChartArea Name="ChartArea1" BackColor="White">
+                                                        <AxisX LineColor="LightGray" MajorGrid-LineColor="LightGray" 
+                                                               TitleFont="Microsoft Sans Serif, 10pt, style=Bold"
+                                                               LabelStyle-Font="Microsoft Sans Serif, 9pt">
+                                                            <MajorGrid LineColor="LightGray" LineDashStyle="Dot" />
+                                                        </AxisX>
+                                                        <AxisY LineColor="LightGray" MajorGrid-LineColor="LightGray"
+                                                               TitleFont="Microsoft Sans Serif, 10pt, style=Bold"
+                                                               LabelStyle-Font="Microsoft Sans Serif, 9pt"
+                                                               Title="Sales Amount ($)">
+                                                            <MajorGrid LineColor="LightGray" LineDashStyle="Dot" />
+                                                        </AxisY>
+                                                    </asp:ChartArea>
+                                                </ChartAreas>
+                                                <Series>
+                                                    <asp:Series Name="Sales" ChartType="Column" Color="#0d6efd" 
+                                                              BorderWidth="0" ShadowOffset="2">
+                                                        <Points>
+                                                            <asp:DataPoint AxisLabel="Monday" YValues="2800" />
+                                                            <asp:DataPoint AxisLabel="Tuesday" YValues="3200" />
+                                                            <asp:DataPoint AxisLabel="Wednesday" YValues="2950" />
+                                                            <asp:DataPoint AxisLabel="Thursday" YValues="3500" />
+                                                        </Points>
+                                                    </asp:Series>
+                                                </Series>
+                                                <Titles>
+                                                    <asp:Title Name="MainTitle" Text="Daily Sales Comparison" 
+                                                             Font="Microsoft Sans Serif, 12pt, style=Bold" 
+                                                             ForeColor="DarkBlue" />
+                                                </Titles>
+                                                <Legends>
+                                                    <asp:Legend Name="Legend1" Docking="Bottom" Alignment="Center"
+                                                              Font="Microsoft Sans Serif, 9pt" />
+                                                </Legends>
+                                            </asp:Chart>
+                                        </div>
+                                        
+                                        <!-- Chart Summary -->
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-primary rounded me-3" style="width: 4px; height: 20px;"></div>
+                                                    <div>
+                                                        <small class="text-muted">Best Performance</small>
+                                                        <div class="fw-bold">Thursday - $3,500</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-secondary rounded me-3" style="width: 4px; height: 20px;"></div>
+                                                    <div>
+                                                        <small class="text-muted">Average Daily Sales</small>
+                                                        <div class="fw-bold">$3,112</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Placeholder -->
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-white border-top mt-5">
+            <div class="container-fluid py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-muted mb-0">&copy; <%: DateTime.Now.Year %> - Analytics Dashboard</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small class="text-muted">Built with ASP.NET Framework</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </form>
+    
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+</body>
+</html>
