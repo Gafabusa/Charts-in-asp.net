@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InsertReceivedTransactionFromAPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ReceivedTransactionDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReceivedTransactionDTO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TranId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerRef" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerTel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Area" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tin" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TranAmount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TranType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VendorTranId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceiptNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TranNarration" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SmsSent" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="VendorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Teller" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reversal" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cancelled" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Offline" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="UtilityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UtilityTranRef" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentToUtility" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegionCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistrictCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VendorToken" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReconFileProcessed" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentToVendor" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UtilitySentDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QueueTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertReceivedTransactionFromAPIResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTransactionCountsByRecordDate">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTransactionCountsByRecordDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionCountsByRecordDateResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FilterReceivedTransactions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="transNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerRef" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerTel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vendorTranId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="receiptNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="teller" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FilterReceivedTransactionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FilterReceivedTransactionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReceivedTransactions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllReceivedTransactionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReceivedTransactionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertReceivedTransactionFromAPISoapIn">
+    <wsdl:part name="parameters" element="tns:InsertReceivedTransactionFromAPI" />
+  </wsdl:message>
+  <wsdl:message name="InsertReceivedTransactionFromAPISoapOut">
+    <wsdl:part name="parameters" element="tns:InsertReceivedTransactionFromAPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionCountsByRecordDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactionCountsByRecordDate" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionCountsByRecordDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionCountsByRecordDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="FilterReceivedTransactionsSoapIn">
+    <wsdl:part name="parameters" element="tns:FilterReceivedTransactions" />
+  </wsdl:message>
+  <wsdl:message name="FilterReceivedTransactionsSoapOut">
+    <wsdl:part name="parameters" element="tns:FilterReceivedTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceivedTransactionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReceivedTransactions" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceivedTransactionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReceivedTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ChartsApiSoap">
+    <wsdl:operation name="InsertReceivedTransactionFromAPI">
+      <wsdl:input message="tns:InsertReceivedTransactionFromAPISoapIn" />
+      <wsdl:output message="tns:InsertReceivedTransactionFromAPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByRecordDate">
+      <wsdl:input message="tns:GetTransactionCountsByRecordDateSoapIn" />
+      <wsdl:output message="tns:GetTransactionCountsByRecordDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FilterReceivedTransactions">
+      <wsdl:input message="tns:FilterReceivedTransactionsSoapIn" />
+      <wsdl:output message="tns:FilterReceivedTransactionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactions">
+      <wsdl:input message="tns:GetAllReceivedTransactionsSoapIn" />
+      <wsdl:output message="tns:GetAllReceivedTransactionsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ChartsApiSoap" type="tns:ChartsApiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertReceivedTransactionFromAPI">
+      <soap:operation soapAction="http://tempuri.org/InsertReceivedTransactionFromAPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByRecordDate">
+      <soap:operation soapAction="http://tempuri.org/GetTransactionCountsByRecordDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FilterReceivedTransactions">
+      <soap:operation soapAction="http://tempuri.org/FilterReceivedTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactions">
+      <soap:operation soapAction="http://tempuri.org/GetAllReceivedTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ChartsApiSoap12" type="tns:ChartsApiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertReceivedTransactionFromAPI">
+      <soap12:operation soapAction="http://tempuri.org/InsertReceivedTransactionFromAPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByRecordDate">
+      <soap12:operation soapAction="http://tempuri.org/GetTransactionCountsByRecordDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FilterReceivedTransactions">
+      <soap12:operation soapAction="http://tempuri.org/FilterReceivedTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactions">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReceivedTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ChartsApi">
+    <wsdl:port name="ChartsApiSoap" binding="tns:ChartsApiSoap">
+      <soap:address location="https://localhost:44311/ChartsApi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ChartsApiSoap12" binding="tns:ChartsApiSoap12">
+      <soap12:address location="https://localhost:44311/ChartsApi.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

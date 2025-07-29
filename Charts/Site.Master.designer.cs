@@ -15,13 +15,22 @@ namespace Charts
     {
 
         /// <summary>
-        /// SalesChart control.
+        /// ddlExportFormat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart SalesChart;
+        protected global::System.Web.UI.WebControls.DropDownList ddlExportFormat;
+
+        /// <summary>
+        /// btnExport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExport;
 
         /// <summary>
         /// MainContent control.

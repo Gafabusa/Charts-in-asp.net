@@ -1,7 +1,13 @@
-﻿using System;
+﻿using Charts.chartsapi;
+using PdfSharp.Drawing;
+using PdfSharp.Fonts;
+using PdfSharp.Pdf;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Text;
 using System.Web.UI;
-using System.Web.UI.DataVisualization.Charting;
-using System.Drawing;
 
 namespace Charts
 {
@@ -9,128 +15,247 @@ namespace Charts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                SetupSalesChart();
-            }
+            // No chart setup needed here
         }
 
-        private void SetupSalesChart()
+        protected void btnExport_Click(object sender, EventArgs e)
         {
-            // Clear any existing series
-            SalesChart.Series.Clear();
-
-            // Create a new series for sales data
-            Series salesSeries = new Series("Daily Sales");
-            salesSeries.ChartType = SeriesChartType.Column;
-            salesSeries.Color = Color.FromArgb(13, 110, 253); // Bootstrap primary blue
-            salesSeries.BorderWidth = 0;
-            salesSeries.ShadowOffset = 2;
-            salesSeries.ShadowColor = Color.FromArgb(128, 0, 0, 0);
-
-            // Sample data for the four days
-            salesSeries.Points.AddXY("Monday", 2800);
-            salesSeries.Points.AddXY("Tuesday", 3200);
-            salesSeries.Points.AddXY("Wednesday", 2950);
-            salesSeries.Points.AddXY("Thursday", 3500);
-
-            // Customize individual points
-            foreach (DataPoint point in salesSeries.Points)
+            if (string.IsNullOrWhiteSpace(ddlExportFormat.SelectedValue))
             {
-                point.BackSecondaryColor = Color.FromArgb(13, 110, 253);
-                point.BackGradientStyle = GradientStyle.TopBottom;
-                point.BorderColor = Color.FromArgb(13, 110, 253);
-                point.LabelForeColor = Color.FromArgb(73, 80, 87);
-                point.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-
-                // Add value labels on top of bars
-                point.IsValueShownAsLabel = true;
-                point.Label = "$" + point.YValues[0].ToString("N0");
-            }
-
-            // Add series to chart
-            SalesChart.Series.Add(salesSeries);
-
-            // Customize chart area
-            ChartArea chartArea = SalesChart.ChartAreas[0];
-            chartArea.BackColor = Color.White;
-            chartArea.BorderColor = Color.LightGray;
-            chartArea.BorderWidth = 1;
-            chartArea.BorderDashStyle = ChartDashStyle.Solid;
-
-            // Customize X-axis
-            chartArea.AxisX.MajorGrid.LineColor = Color.LightGray;
-            chartArea.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            chartArea.AxisX.LineColor = Color.LightGray;
-            chartArea.AxisX.LabelStyle.ForeColor = Color.FromArgb(73, 80, 87);
-            chartArea.AxisX.LabelStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
-            chartArea.AxisX.Title = "Days of Week";
-            chartArea.AxisX.TitleFont = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
-            chartArea.AxisX.TitleForeColor = Color.FromArgb(73, 80, 87);
-
-            // Customize Y-axis
-            chartArea.AxisY.MajorGrid.LineColor = Color.LightGray;
-            chartArea.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            chartArea.AxisY.LineColor = Color.LightGray;
-            chartArea.AxisY.LabelStyle.ForeColor = Color.FromArgb(73, 80, 87);
-            chartArea.AxisY.LabelStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
-            chartArea.AxisY.LabelStyle.Format = "${0:N0}";
-            chartArea.AxisY.Title = "Sales Amount ($)";
-            chartArea.AxisY.TitleFont = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
-            chartArea.AxisY.TitleForeColor = Color.FromArgb(73, 80, 87);
-
-            // Set Y-axis range for better visualization
-            chartArea.AxisY.Minimum = 0;
-            chartArea.AxisY.Maximum = 4000;
-            chartArea.AxisY.Interval = 500;
-
-            // Customize chart title
-            if (SalesChart.Titles.Count == 0)
-            {
-                Title title = new Title();
-                title.Text = "Weekly Sales Performance";
-                title.Font = new Font("Microsoft Sans Serif", 14, FontStyle.Bold);
-                title.ForeColor = Color.FromArgb(33, 37, 41);
-                title.Docking = Docking.Top;
-                SalesChart.Titles.Add(title);
-            }
-
-            // Customize legend
-            if (SalesChart.Legends.Count > 0)
-            {
-                Legend legend = SalesChart.Legends[0];
-                legend.Docking = Docking.Bottom;
-                legend.Alignment = StringAlignment.Center;
-                legend.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
-                legend.ForeColor = Color.FromArgb(73, 80, 87);
-                legend.BackColor = Color.Transparent;
-            }
-        }
-
-        // Method to update chart data (you can call this when data changes)
-        public void UpdateChartData(string[] days, double[] values)
-        {
-            if (days.Length != values.Length)
+                // Handle error in child page if needed
                 return;
-
-            SalesChart.Series.Clear();
-
-            Series salesSeries = new Series("Daily Sales");
-            salesSeries.ChartType = SeriesChartType.Column;
-            salesSeries.Color = Color.FromArgb(13, 110, 253);
-            salesSeries.BorderWidth = 0;
-            salesSeries.ShadowOffset = 2;
-
-            for (int i = 0; i < days.Length; i++)
-            {
-                int pointIndex = salesSeries.Points.AddXY(days[i], values[i]);
-                DataPoint point = salesSeries.Points[pointIndex]; point.IsValueShownAsLabel = true;
-                point.Label = "$" + values[i].ToString("N0");
-                point.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-                point.LabelForeColor = Color.FromArgb(73, 80, 87);
             }
 
-            SalesChart.Series.Add(salesSeries);
+            ChartsApi api = new ChartsApi();
+            DataTable dt = api.GetAllReceivedTransactions();
+
+            if (dt.Rows.Count == 0)
+            {
+                // Handle empty data in child page if needed
+                return;
+            }
+
+            if (ddlExportFormat.SelectedValue == "pdf")
+            {
+                ExportToPdf(dt);
+            }
+            else if (ddlExportFormat.SelectedValue == "csv")
+            {
+                ExportToCsv(dt);
+            }
+        }
+
+        private void ExportToPdf(DataTable dt)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                PdfDocument document = new PdfDocument();
+                PdfPage page = document.AddPage();
+                page.Orientation = PdfSharp.PageOrientation.Landscape; // Landscape for wide table
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+
+                // Fonts
+                var fontOptions = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.EmbedCompleteFontFile);
+                XFont titleFont = new XFont("Arial", 18, XFontStyleEx.Bold, fontOptions);
+                XFont headerFont = new XFont("Arial", 10, XFontStyleEx.Bold, fontOptions);
+                XFont cellFont = new XFont("Arial", 9, XFontStyleEx.Regular, fontOptions);
+
+                // Title
+                gfx.DrawString("Fort Portal City Marathon Registrations", titleFont, XBrushes.Black,
+                    new XRect(XUnit.FromPoint(0), XUnit.FromPoint(20), XUnit.FromPoint(page.Width.Point), XUnit.FromPoint(30)),
+                    XStringFormats.Center);
+
+                // Table setup
+                double x = 10, y = 60;
+                double cellWidth = 60; // Adjusted for 12 columns
+                double cellHeight = 20; // Increased for better readability
+                int maxRowsPerPage = (int)((page.Height.Point - y - 20) / cellHeight); // Reserve space for footer
+
+                // Headers
+                string[] headers = new string[]
+                {
+                    "TranId", "TransNo", "CustomerRef", "CustomerName", "CustomerType", "CustomerTel",
+                    "PaymentDate", "RecordDate", "VendorTranId", "ReceiptNo", "VendorCode", "Teller"
+                };
+
+                // Draw header background
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    gfx.DrawRectangle(XBrushes.LightGray, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
+                        XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                    gfx.DrawString(headers[i], headerFont, XBrushes.Black,
+                        new XRect(XUnit.FromPoint(x + i * cellWidth + 2), XUnit.FromPoint(y + 2),
+                            XUnit.FromPoint(cellWidth - 4), XUnit.FromPoint(cellHeight - 4)), XStringFormats.TopCenter);
+                    gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
+                        XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                }
+
+                // Data Rows
+                int rowIndex = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (rowIndex % maxRowsPerPage == 0 && rowIndex > 0)
+                    {
+                        page = document.AddPage();
+                        page.Orientation = PdfSharp.PageOrientation.Landscape;
+                        gfx = XGraphics.FromPdfPage(page);
+                        y = 20;
+
+                        // Redraw headers on new page
+                        for (int i = 0; i < headers.Length; i++)
+                        {
+                            gfx.DrawRectangle(XBrushes.LightGray, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
+                                XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                            gfx.DrawString(headers[i], headerFont, XBrushes.Black,
+                                new XRect(XUnit.FromPoint(x + i * cellWidth + 2), XUnit.FromPoint(y + 2),
+                                    XUnit.FromPoint(cellWidth - 4), XUnit.FromPoint(cellHeight - 4)), XStringFormats.TopCenter);
+                            gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
+                                XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                        }
+                        y += cellHeight;
+                    }
+
+                    string[] values = new string[]
+                    {
+                        row["TranId"].ToString(),
+                        row["TransNo"]?.ToString() ?? "",
+                        row["CustomerRef"]?.ToString() ?? "",
+                        row["CustomerName"]?.ToString() ?? "",
+                        row["CustomerType"]?.ToString() ?? "",
+                        row["CustomerTel"]?.ToString() ?? "",
+                        row["PaymentDate"] is DateTime pd ? pd.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                        row["RecordDate"] is DateTime rd ? rd.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                        row["VendorTranId"]?.ToString() ?? "",
+                        row["ReceiptNo"]?.ToString() ?? "",
+                        row["VendorCode"]?.ToString() ?? "",
+                        row["Teller"]?.ToString() ?? ""
+                    };
+
+                    y += cellHeight;
+                    for (int i = 0; i < values.Length; i++)
+                    {
+                        // Split long text into multiple lines
+                        string[] lines = WrapText(values[i], cellFont, cellWidth - 4, gfx);
+                        double currentY = y + 2;
+                        foreach (string line in lines)
+                        {
+                            gfx.DrawString(line, cellFont, XBrushes.Black,
+                                new XRect(XUnit.FromPoint(x + i * cellWidth + 2), XUnit.FromPoint(currentY),
+                                    XUnit.FromPoint(cellWidth - 4), XUnit.FromPoint(cellHeight - 4)), XStringFormats.TopLeft);
+                            currentY += 10; // Adjust line spacing
+                        }
+                        gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
+                            XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                    }
+                    rowIndex++;
+                }
+
+                // Save to MemoryStream
+                document.Save(ms);
+                document.Close();
+
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", "attachment; filename=ReceivedTransactions.pdf");
+                Response.BinaryWrite(ms.ToArray());
+                Response.End();
+            }
+        }
+
+        private string[] WrapText(string text, XFont font, double maxWidth, XGraphics gfx)
+        {
+            if (string.IsNullOrEmpty(text)) return new[] { "" };
+
+            List<string> lines = new List<string>();
+            string[] words = text.Split(' ');
+            string currentLine = "";
+
+            foreach (string word in words)
+            {
+                string testLine = string.IsNullOrEmpty(currentLine) ? word : currentLine + " " + word;
+                double width = gfx.MeasureString(testLine, font).Width;
+
+                if (width <= maxWidth)
+                {
+                    currentLine = testLine;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(currentLine))
+                    {
+                        lines.Add(currentLine);
+                    }
+                    currentLine = word;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentLine))
+            {
+                lines.Add(currentLine);
+            }
+
+            return lines.ToArray();
+        }
+
+        private void ExportToCsv(DataTable dt)
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.AppendLine("TranId,TransNo,CustomerRef,CustomerName,CustomerType,CustomerTel,Area,Tin,TranAmount," +
+                           "PaymentDate,RecordDate,TranType,PaymentType,VendorTranId,ReceiptNo,TranNarration,SmsSent,VendorCode," +
+                           "Teller,Reversal,Cancelled,Offline,UtilityCode,UtilityTranRef,SentToUtility,RegionCode,DistrictCode,VendorToken," +
+                           "ReconFileProcessed,Status,SentToVendor,UtilitySentDate,QueueTime,Reason");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string[] values = new string[]
+                {
+                    row["TranId"].ToString(),
+                    $"\"{EscapeCsv(row["TransNo"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["CustomerRef"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["CustomerName"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["CustomerType"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["CustomerTel"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["Area"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["Tin"]?.ToString())}\"",
+                    row["TranAmount"].ToString(),
+                    row["PaymentDate"] is DateTime pd ? pd.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    row["RecordDate"] is DateTime rd ? rd.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    $"\"{EscapeCsv(row["TranType"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["PaymentType"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["VendorTranId"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["ReceiptNo"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["TranNarration"]?.ToString())}\"",
+                    row["SmsSent"].ToString(),
+                    $"\"{EscapeCsv(row["VendorCode"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["Teller"]?.ToString())}\"",
+                    row["Reversal"]?.ToString() ?? "",
+                    row["Cancelled"]?.ToString() ?? "",
+                    row["Offline"]?.ToString() ?? "",
+                    $"\"{EscapeCsv(row["UtilityCode"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["UtilityTranRef"]?.ToString())}\"",
+                    row["SentToUtility"].ToString(),
+                    $"\"{EscapeCsv(row["RegionCode"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["DistrictCode"]?.ToString())}\"",
+                    $"\"{EscapeCsv(row["VendorToken"]?.ToString())}\"",
+                    row["ReconFileProcessed"]?.ToString() ?? "",
+                    $"\"{EscapeCsv(row["Status"]?.ToString())}\"",
+                    row["SentToVendor"]?.ToString() ?? "",
+                    row["UtilitySentDate"] is DateTime usd ? usd.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    row["QueueTime"] is DateTime qt ? qt.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    $"\"{EscapeCsv(row["Reason"]?.ToString())}\""
+                };
+                csv.AppendLine(string.Join(",", values));
+            }
+
+            Response.ContentType = "text/csv";
+            Response.AddHeader("Content-Disposition", "attachment; filename=ReceivedTransactions.csv");
+            Response.Write(csv.ToString());
+            Response.End();
+        }
+
+        private string EscapeCsv(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return "";
+            return value.Replace("\"", "\"\"");
         }
     }
 }

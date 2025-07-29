@@ -11,35 +11,35 @@ namespace Charts.Admin
 {
 
 
-    public partial class Dashboard
+    public partial class Filters
     {
 
         /// <summary>
-        /// SalesChart control.
+        /// ddlFilterField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart SalesChart;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFilterField;
 
         /// <summary>
-        /// FileUpload1 control.
+        /// txtFilterValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.WebControls.TextBox txtFilterValue;
 
         /// <summary>
-        /// btnUpload control.
+        /// btnFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpload;
+        protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
         /// lblMessage control.
@@ -49,5 +49,14 @@ namespace Charts.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// gvTransactions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTransactions;
     }
 }
