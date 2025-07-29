@@ -1,7 +1,9 @@
 ﻿using ChartsClassLibrary.EntityObjects;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace ChartsClassLibrary.ControlObjects
 {
@@ -92,6 +94,28 @@ namespace ChartsClassLibrary.ControlObjects
         public DataTable GetAllReceivedTransactions()
         {
             return dbHelper.ExecuteDataTable("sp_GetAllReceivedTransactions");
+        }
+        //getting transaction count
+        public DataTable GetTotalTransactionCount()
+        {
+            return dbHelper.ExecuteDataTable("GetTransactionCount");
+        }
+        //getting all transactions by vendor code
+        public DataTable GetAllReceivedTransactionsByVendor(string vendorCode)
+        {
+            object[] parameters = new object[] { vendorCode };
+            return dbHelper.ExecuteDataTable("sp_GetAllReceivedTransactionsByVendor", parameters);
+        }
+        // Fetch transaction counts by RecordDate and Vendor
+        public DataTable GetTransactionCountsByRecordDateAndVendor(string vendorCode)
+        {
+            object[] parameters = new object[] { vendorCode };
+            return dbHelper.ExecuteDataTable("sp_GetTransactionCountsByRecordDateAndVendor", parameters);
+        }
+        //get ordered transactions 
+        public DataTable GetAllReceivedTransactionsOrdered()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetAllReceivedTransactionsOrdered");
         }
     }
 }

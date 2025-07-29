@@ -35,33 +35,41 @@ namespace ChartsApi
         }
         // Filter transactions based on criteria
         [WebMethod]
-        public DataTable FilterReceivedTransactions(
-       string transNo,
-       string customerRef,
-       string customerName,
-       string customerType,
-       string customerTel,
-       string vendorTranId,
-       string receiptNo,
-       string vendorCode,
-       string teller)
+        public DataTable FilterReceivedTransactions(string transNo,string customerRef,string customerName,string customerType,
+       string customerTel,string vendorTranId,string receiptNo,string vendorCode,string teller)
         {
-            return businessLogic.FilterReceivedTransactions(
-                transNo,
-                customerRef,
-                customerName,
-                customerType,
-                customerTel,
-                vendorTranId,
-                receiptNo,
-                vendorCode,
-                teller);
+            return businessLogic.FilterReceivedTransactions(transNo,customerRef,customerName,customerType,customerTel,
+                vendorTranId,receiptNo,vendorCode,teller);
         }
         // Fetch all transactions
         [WebMethod]
         public DataTable GetAllReceivedTransactions()
         {
             return businessLogic.GetAllReceivedTransactions();
+        }
+        //getting transaction count
+        [WebMethod]
+        public DataTable GetTotalTransactionCount()
+        {
+            return businessLogic.GetTotalTransactionCount();
+        }
+        //getting all transactions by vendor code
+        [WebMethod]
+        public DataTable GetAllReceivedTransactionsByVendor(string vendorCode)
+        {
+            return businessLogic.GetAllReceivedTransactionsByVendor(vendorCode);
+        }
+        // Fetch transaction counts by RecordDate and Vendor
+        [WebMethod]
+        public DataTable GetTransactionCountsByRecordDateAndVendor(string vendorCode)
+        {
+            return businessLogic.GetTransactionCountsByRecordDateAndVendor(vendorCode);
+        }
+        //get ordered transactions 
+        [WebMethod]
+        public DataTable GetAllReceivedTransactionsOrdered()
+        {
+            return businessLogic.GetAllReceivedTransactionsOrdered();
         }
 
 
