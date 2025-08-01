@@ -113,6 +113,167 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetTotalTransactionCount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTotalTransactionCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTotalTransactionCountResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReceivedTransactionsByVendor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReceivedTransactionsByVendorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReceivedTransactionsByVendorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionCountsByRecordDateAndVendor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionCountsByRecordDateAndVendorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionCountsByRecordDateAndVendorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReceivedTransactionsOrdered">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllReceivedTransactionsOrderedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReceivedTransactionsOrderedResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionCountsByVendorCode">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTransactionCountsByVendorCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionCountsByVendorCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMostRecentTransactions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMostRecentTransactionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMostRecentTransactionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomerTypeDistribution">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCustomerTypeDistributionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomerTypeDistributionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusDistribution">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetStatusDistributionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatusDistributionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionsPerHour">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTransactionsPerHourResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionsPerHourResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="InsertReceivedTransactionFromAPISoapIn">
@@ -139,6 +300,60 @@
   <wsdl:message name="GetAllReceivedTransactionsSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllReceivedTransactionsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetTotalTransactionCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTotalTransactionCount" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalTransactionCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTotalTransactionCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceivedTransactionsByVendorSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReceivedTransactionsByVendor" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceivedTransactionsByVendorSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReceivedTransactionsByVendorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionCountsByRecordDateAndVendorSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactionCountsByRecordDateAndVendor" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionCountsByRecordDateAndVendorSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionCountsByRecordDateAndVendorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceivedTransactionsOrderedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReceivedTransactionsOrdered" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceivedTransactionsOrderedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReceivedTransactionsOrderedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionCountsByVendorCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactionCountsByVendorCode" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionCountsByVendorCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionCountsByVendorCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMostRecentTransactionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMostRecentTransactions" />
+  </wsdl:message>
+  <wsdl:message name="GetMostRecentTransactionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMostRecentTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerTypeDistributionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerTypeDistribution" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerTypeDistributionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerTypeDistributionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusDistributionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatusDistribution" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusDistributionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatusDistributionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsPerHourSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactionsPerHour" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsPerHourSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionsPerHourResponse" />
+  </wsdl:message>
   <wsdl:portType name="ChartsApiSoap">
     <wsdl:operation name="InsertReceivedTransactionFromAPI">
       <wsdl:input message="tns:InsertReceivedTransactionFromAPISoapIn" />
@@ -155,6 +370,42 @@
     <wsdl:operation name="GetAllReceivedTransactions">
       <wsdl:input message="tns:GetAllReceivedTransactionsSoapIn" />
       <wsdl:output message="tns:GetAllReceivedTransactionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalTransactionCount">
+      <wsdl:input message="tns:GetTotalTransactionCountSoapIn" />
+      <wsdl:output message="tns:GetTotalTransactionCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactionsByVendor">
+      <wsdl:input message="tns:GetAllReceivedTransactionsByVendorSoapIn" />
+      <wsdl:output message="tns:GetAllReceivedTransactionsByVendorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByRecordDateAndVendor">
+      <wsdl:input message="tns:GetTransactionCountsByRecordDateAndVendorSoapIn" />
+      <wsdl:output message="tns:GetTransactionCountsByRecordDateAndVendorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactionsOrdered">
+      <wsdl:input message="tns:GetAllReceivedTransactionsOrderedSoapIn" />
+      <wsdl:output message="tns:GetAllReceivedTransactionsOrderedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByVendorCode">
+      <wsdl:input message="tns:GetTransactionCountsByVendorCodeSoapIn" />
+      <wsdl:output message="tns:GetTransactionCountsByVendorCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMostRecentTransactions">
+      <wsdl:input message="tns:GetMostRecentTransactionsSoapIn" />
+      <wsdl:output message="tns:GetMostRecentTransactionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerTypeDistribution">
+      <wsdl:input message="tns:GetCustomerTypeDistributionSoapIn" />
+      <wsdl:output message="tns:GetCustomerTypeDistributionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusDistribution">
+      <wsdl:input message="tns:GetStatusDistributionSoapIn" />
+      <wsdl:output message="tns:GetStatusDistributionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsPerHour">
+      <wsdl:input message="tns:GetTransactionsPerHourSoapIn" />
+      <wsdl:output message="tns:GetTransactionsPerHourSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ChartsApiSoap" type="tns:ChartsApiSoap">
@@ -195,6 +446,87 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetTotalTransactionCount">
+      <soap:operation soapAction="http://tempuri.org/GetTotalTransactionCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactionsByVendor">
+      <soap:operation soapAction="http://tempuri.org/GetAllReceivedTransactionsByVendor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByRecordDateAndVendor">
+      <soap:operation soapAction="http://tempuri.org/GetTransactionCountsByRecordDateAndVendor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactionsOrdered">
+      <soap:operation soapAction="http://tempuri.org/GetAllReceivedTransactionsOrdered" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByVendorCode">
+      <soap:operation soapAction="http://tempuri.org/GetTransactionCountsByVendorCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMostRecentTransactions">
+      <soap:operation soapAction="http://tempuri.org/GetMostRecentTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerTypeDistribution">
+      <soap:operation soapAction="http://tempuri.org/GetCustomerTypeDistribution" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusDistribution">
+      <soap:operation soapAction="http://tempuri.org/GetStatusDistribution" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsPerHour">
+      <soap:operation soapAction="http://tempuri.org/GetTransactionsPerHour" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ChartsApiSoap12" type="tns:ChartsApiSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -227,6 +559,87 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllReceivedTransactions">
       <soap12:operation soapAction="http://tempuri.org/GetAllReceivedTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalTransactionCount">
+      <soap12:operation soapAction="http://tempuri.org/GetTotalTransactionCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactionsByVendor">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReceivedTransactionsByVendor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByRecordDateAndVendor">
+      <soap12:operation soapAction="http://tempuri.org/GetTransactionCountsByRecordDateAndVendor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceivedTransactionsOrdered">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReceivedTransactionsOrdered" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionCountsByVendorCode">
+      <soap12:operation soapAction="http://tempuri.org/GetTransactionCountsByVendorCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMostRecentTransactions">
+      <soap12:operation soapAction="http://tempuri.org/GetMostRecentTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerTypeDistribution">
+      <soap12:operation soapAction="http://tempuri.org/GetCustomerTypeDistribution" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusDistribution">
+      <soap12:operation soapAction="http://tempuri.org/GetStatusDistribution" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsPerHour">
+      <soap12:operation soapAction="http://tempuri.org/GetTransactionsPerHour" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

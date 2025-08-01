@@ -38,6 +38,24 @@ namespace Charts.chartsapi {
         
         private System.Threading.SendOrPostCallback GetAllReceivedTransactionsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetTotalTransactionCountOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllReceivedTransactionsByVendorOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetTransactionCountsByRecordDateAndVendorOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllReceivedTransactionsOrderedOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetTransactionCountsByVendorCodeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetMostRecentTransactionsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetCustomerTypeDistributionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetStatusDistributionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetTransactionsPerHourOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -87,6 +105,33 @@ namespace Charts.chartsapi {
         
         /// <remarks/>
         public event GetAllReceivedTransactionsCompletedEventHandler GetAllReceivedTransactionsCompleted;
+        
+        /// <remarks/>
+        public event GetTotalTransactionCountCompletedEventHandler GetTotalTransactionCountCompleted;
+        
+        /// <remarks/>
+        public event GetAllReceivedTransactionsByVendorCompletedEventHandler GetAllReceivedTransactionsByVendorCompleted;
+        
+        /// <remarks/>
+        public event GetTransactionCountsByRecordDateAndVendorCompletedEventHandler GetTransactionCountsByRecordDateAndVendorCompleted;
+        
+        /// <remarks/>
+        public event GetAllReceivedTransactionsOrderedCompletedEventHandler GetAllReceivedTransactionsOrderedCompleted;
+        
+        /// <remarks/>
+        public event GetTransactionCountsByVendorCodeCompletedEventHandler GetTransactionCountsByVendorCodeCompleted;
+        
+        /// <remarks/>
+        public event GetMostRecentTransactionsCompletedEventHandler GetMostRecentTransactionsCompleted;
+        
+        /// <remarks/>
+        public event GetCustomerTypeDistributionCompletedEventHandler GetCustomerTypeDistributionCompleted;
+        
+        /// <remarks/>
+        public event GetStatusDistributionCompletedEventHandler GetStatusDistributionCompleted;
+        
+        /// <remarks/>
+        public event GetTransactionsPerHourCompletedEventHandler GetTransactionsPerHourCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InsertReceivedTransactionFromAPI", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -212,6 +257,253 @@ namespace Charts.chartsapi {
             if ((this.GetAllReceivedTransactionsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetAllReceivedTransactionsCompleted(this, new GetAllReceivedTransactionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTotalTransactionCount", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetTotalTransactionCount() {
+            object[] results = this.Invoke("GetTotalTransactionCount", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTotalTransactionCountAsync() {
+            this.GetTotalTransactionCountAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetTotalTransactionCountAsync(object userState) {
+            if ((this.GetTotalTransactionCountOperationCompleted == null)) {
+                this.GetTotalTransactionCountOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTotalTransactionCountOperationCompleted);
+            }
+            this.InvokeAsync("GetTotalTransactionCount", new object[0], this.GetTotalTransactionCountOperationCompleted, userState);
+        }
+        
+        private void OnGetTotalTransactionCountOperationCompleted(object arg) {
+            if ((this.GetTotalTransactionCountCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTotalTransactionCountCompleted(this, new GetTotalTransactionCountCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllReceivedTransactionsByVendor", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllReceivedTransactionsByVendor(string vendorCode) {
+            object[] results = this.Invoke("GetAllReceivedTransactionsByVendor", new object[] {
+                        vendorCode});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllReceivedTransactionsByVendorAsync(string vendorCode) {
+            this.GetAllReceivedTransactionsByVendorAsync(vendorCode, null);
+        }
+        
+        /// <remarks/>
+        public void GetAllReceivedTransactionsByVendorAsync(string vendorCode, object userState) {
+            if ((this.GetAllReceivedTransactionsByVendorOperationCompleted == null)) {
+                this.GetAllReceivedTransactionsByVendorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllReceivedTransactionsByVendorOperationCompleted);
+            }
+            this.InvokeAsync("GetAllReceivedTransactionsByVendor", new object[] {
+                        vendorCode}, this.GetAllReceivedTransactionsByVendorOperationCompleted, userState);
+        }
+        
+        private void OnGetAllReceivedTransactionsByVendorOperationCompleted(object arg) {
+            if ((this.GetAllReceivedTransactionsByVendorCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllReceivedTransactionsByVendorCompleted(this, new GetAllReceivedTransactionsByVendorCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTransactionCountsByRecordDateAndVendor", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetTransactionCountsByRecordDateAndVendor(string vendorCode) {
+            object[] results = this.Invoke("GetTransactionCountsByRecordDateAndVendor", new object[] {
+                        vendorCode});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTransactionCountsByRecordDateAndVendorAsync(string vendorCode) {
+            this.GetTransactionCountsByRecordDateAndVendorAsync(vendorCode, null);
+        }
+        
+        /// <remarks/>
+        public void GetTransactionCountsByRecordDateAndVendorAsync(string vendorCode, object userState) {
+            if ((this.GetTransactionCountsByRecordDateAndVendorOperationCompleted == null)) {
+                this.GetTransactionCountsByRecordDateAndVendorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTransactionCountsByRecordDateAndVendorOperationCompleted);
+            }
+            this.InvokeAsync("GetTransactionCountsByRecordDateAndVendor", new object[] {
+                        vendorCode}, this.GetTransactionCountsByRecordDateAndVendorOperationCompleted, userState);
+        }
+        
+        private void OnGetTransactionCountsByRecordDateAndVendorOperationCompleted(object arg) {
+            if ((this.GetTransactionCountsByRecordDateAndVendorCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTransactionCountsByRecordDateAndVendorCompleted(this, new GetTransactionCountsByRecordDateAndVendorCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllReceivedTransactionsOrdered", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllReceivedTransactionsOrdered() {
+            object[] results = this.Invoke("GetAllReceivedTransactionsOrdered", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllReceivedTransactionsOrderedAsync() {
+            this.GetAllReceivedTransactionsOrderedAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllReceivedTransactionsOrderedAsync(object userState) {
+            if ((this.GetAllReceivedTransactionsOrderedOperationCompleted == null)) {
+                this.GetAllReceivedTransactionsOrderedOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllReceivedTransactionsOrderedOperationCompleted);
+            }
+            this.InvokeAsync("GetAllReceivedTransactionsOrdered", new object[0], this.GetAllReceivedTransactionsOrderedOperationCompleted, userState);
+        }
+        
+        private void OnGetAllReceivedTransactionsOrderedOperationCompleted(object arg) {
+            if ((this.GetAllReceivedTransactionsOrderedCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllReceivedTransactionsOrderedCompleted(this, new GetAllReceivedTransactionsOrderedCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTransactionCountsByVendorCode", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetTransactionCountsByVendorCode() {
+            object[] results = this.Invoke("GetTransactionCountsByVendorCode", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTransactionCountsByVendorCodeAsync() {
+            this.GetTransactionCountsByVendorCodeAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetTransactionCountsByVendorCodeAsync(object userState) {
+            if ((this.GetTransactionCountsByVendorCodeOperationCompleted == null)) {
+                this.GetTransactionCountsByVendorCodeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTransactionCountsByVendorCodeOperationCompleted);
+            }
+            this.InvokeAsync("GetTransactionCountsByVendorCode", new object[0], this.GetTransactionCountsByVendorCodeOperationCompleted, userState);
+        }
+        
+        private void OnGetTransactionCountsByVendorCodeOperationCompleted(object arg) {
+            if ((this.GetTransactionCountsByVendorCodeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTransactionCountsByVendorCodeCompleted(this, new GetTransactionCountsByVendorCodeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetMostRecentTransactions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetMostRecentTransactions() {
+            object[] results = this.Invoke("GetMostRecentTransactions", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetMostRecentTransactionsAsync() {
+            this.GetMostRecentTransactionsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetMostRecentTransactionsAsync(object userState) {
+            if ((this.GetMostRecentTransactionsOperationCompleted == null)) {
+                this.GetMostRecentTransactionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMostRecentTransactionsOperationCompleted);
+            }
+            this.InvokeAsync("GetMostRecentTransactions", new object[0], this.GetMostRecentTransactionsOperationCompleted, userState);
+        }
+        
+        private void OnGetMostRecentTransactionsOperationCompleted(object arg) {
+            if ((this.GetMostRecentTransactionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetMostRecentTransactionsCompleted(this, new GetMostRecentTransactionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetCustomerTypeDistribution", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetCustomerTypeDistribution() {
+            object[] results = this.Invoke("GetCustomerTypeDistribution", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetCustomerTypeDistributionAsync() {
+            this.GetCustomerTypeDistributionAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetCustomerTypeDistributionAsync(object userState) {
+            if ((this.GetCustomerTypeDistributionOperationCompleted == null)) {
+                this.GetCustomerTypeDistributionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCustomerTypeDistributionOperationCompleted);
+            }
+            this.InvokeAsync("GetCustomerTypeDistribution", new object[0], this.GetCustomerTypeDistributionOperationCompleted, userState);
+        }
+        
+        private void OnGetCustomerTypeDistributionOperationCompleted(object arg) {
+            if ((this.GetCustomerTypeDistributionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCustomerTypeDistributionCompleted(this, new GetCustomerTypeDistributionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetStatusDistribution", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetStatusDistribution() {
+            object[] results = this.Invoke("GetStatusDistribution", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetStatusDistributionAsync() {
+            this.GetStatusDistributionAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetStatusDistributionAsync(object userState) {
+            if ((this.GetStatusDistributionOperationCompleted == null)) {
+                this.GetStatusDistributionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatusDistributionOperationCompleted);
+            }
+            this.InvokeAsync("GetStatusDistribution", new object[0], this.GetStatusDistributionOperationCompleted, userState);
+        }
+        
+        private void OnGetStatusDistributionOperationCompleted(object arg) {
+            if ((this.GetStatusDistributionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetStatusDistributionCompleted(this, new GetStatusDistributionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTransactionsPerHour", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetTransactionsPerHour() {
+            object[] results = this.Invoke("GetTransactionsPerHour", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTransactionsPerHourAsync() {
+            this.GetTransactionsPerHourAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetTransactionsPerHourAsync(object userState) {
+            if ((this.GetTransactionsPerHourOperationCompleted == null)) {
+                this.GetTransactionsPerHourOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTransactionsPerHourOperationCompleted);
+            }
+            this.InvokeAsync("GetTransactionsPerHour", new object[0], this.GetTransactionsPerHourOperationCompleted, userState);
+        }
+        
+        private void OnGetTransactionsPerHourOperationCompleted(object arg) {
+            if ((this.GetTransactionsPerHourCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTransactionsPerHourCompleted(this, new GetTransactionsPerHourCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -727,6 +1019,240 @@ namespace Charts.chartsapi {
         private object[] results;
         
         internal GetAllReceivedTransactionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetTotalTransactionCountCompletedEventHandler(object sender, GetTotalTransactionCountCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTotalTransactionCountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTotalTransactionCountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetAllReceivedTransactionsByVendorCompletedEventHandler(object sender, GetAllReceivedTransactionsByVendorCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllReceivedTransactionsByVendorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllReceivedTransactionsByVendorCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetTransactionCountsByRecordDateAndVendorCompletedEventHandler(object sender, GetTransactionCountsByRecordDateAndVendorCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTransactionCountsByRecordDateAndVendorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTransactionCountsByRecordDateAndVendorCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetAllReceivedTransactionsOrderedCompletedEventHandler(object sender, GetAllReceivedTransactionsOrderedCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllReceivedTransactionsOrderedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllReceivedTransactionsOrderedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetTransactionCountsByVendorCodeCompletedEventHandler(object sender, GetTransactionCountsByVendorCodeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTransactionCountsByVendorCodeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTransactionCountsByVendorCodeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetMostRecentTransactionsCompletedEventHandler(object sender, GetMostRecentTransactionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetMostRecentTransactionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetMostRecentTransactionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetCustomerTypeDistributionCompletedEventHandler(object sender, GetCustomerTypeDistributionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCustomerTypeDistributionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetCustomerTypeDistributionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetStatusDistributionCompletedEventHandler(object sender, GetStatusDistributionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetStatusDistributionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetStatusDistributionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetTransactionsPerHourCompletedEventHandler(object sender, GetTransactionsPerHourCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTransactionsPerHourCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTransactionsPerHourCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

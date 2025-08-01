@@ -35,14 +35,28 @@
 
         <asp:Label ID="lblMessage" runat="server" CssClass="text-danger mb-3 d-block" Visible="false" />
 
+        <!-- Top Pagination Info -->
+        <div class="d-flex justify-content-center mb-3">
+            <asp:Label ID="lblPageInfoTop" runat="server" CssClass="ms-3 align-self-center fw-bold" Style="color: #333;" />
+        </div>
+
         <div class="card border-0 shadow-sm">
             <div class="card-body">
                 <div class="table-responsive">
                     <asp:GridView ID="gvTransactions" runat="server" CssClass="table table-striped table-bordered" AutoGenerateColumns="true"
-                        EmptyDataText="No transactions found." HeaderStyle-CssClass="table-dark">
+                        EmptyDataText="No transactions found." HeaderStyle-CssClass="table-dark"
+                        AllowPaging="true" PageSize="50" OnPageIndexChanging="gvTransactions_PageIndexChanging"
+                        PagerSettings-Mode="NumericFirstLast" PagerSettings-Position="Bottom" PagerStyle-CssClass="pagination-container">
+                        <PagerStyle HorizontalAlign="Center" CssClass="pagination justify-content-center" />
+                        <PagerSettings FirstPageText="First" LastPageText="Last" Mode="NumericFirstLast" PageButtonCount="10" />
                     </asp:GridView>
                 </div>
             </div>
+        </div>
+
+        <!-- Bottom Pagination Info -->
+        <div class="d-flex justify-content-center mt-3">
+            <asp:Label ID="lblPageInfoBottom" runat="server" CssClass="ms-3 align-self-center fw-bold" Style="color: #333;" />
         </div>
     </div>
 </asp:Content>

@@ -71,7 +71,35 @@ namespace ChartsApi
         {
             return businessLogic.GetAllReceivedTransactionsOrdered();
         }
-
-
+        //Fetch transaction counts by VendorCode
+        [WebMethod]
+        public DataTable GetTransactionCountsByVendorCode()
+        {
+            return businessLogic.GetTransactionCountsByVendorCode();
+        }
+        //get most recent transactions
+        [WebMethod]
+        public DataTable GetMostRecentTransactions()
+        {
+            return businessLogic.GetMostRecentTransactions();
+        }
+        // Fetch customer type distribution
+        [WebMethod]
+        public System.Data.DataTable GetCustomerTypeDistribution()
+        {
+            return businessLogic.GetCustomerTypeDistribution();
+        }
+        //get status distribution
+        [WebMethod]
+        public DataTable GetStatusDistribution()
+        {
+            return businessLogic.GetStatusDistribution();
+        }
+        //hourly transactions
+        [WebMethod]
+        public DataTable GetTransactionsPerHour()
+        {
+            return businessLogic.GetTransactionsPerHour();
+        }
     }
 }

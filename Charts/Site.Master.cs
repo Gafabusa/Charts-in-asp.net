@@ -15,7 +15,21 @@ namespace Charts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // No chart setup needed here
+            // Set active class based on the current page
+            string currentPath = Request.Url.AbsolutePath.ToLower();
+            if (currentPath.Contains("dashboard.aspx"))
+            {
+                lnkDashboard.Attributes["class"] = "nav-link text-dark rounded d-flex align-items-center py-2 px-3 active bg-info bg-opacity-25";
+            }
+            else if (currentPath.Contains("filters.aspx"))
+            {
+                lnkFilters.Attributes["class"] = "nav-link text-dark rounded d-flex align-items-center py-2 px-3 active bg-warning bg-opacity-25";
+            }
+            else
+            {
+                lnkDashboard.Attributes["class"] = "nav-link text-dark rounded d-flex align-items-center py-2 px-3 bg-opacity-10";
+                lnkFilters.Attributes["class"] = "nav-link text-dark rounded d-flex align-items-center py-2 px-3 bg-opacity-10";
+            }
         }
 
         protected void btnExport_Click(object sender, EventArgs e)
@@ -62,7 +76,7 @@ namespace Charts
 
                 // Title
                 gfx.DrawString("Fort Portal City Marathon Registrations", titleFont, XBrushes.Black,
-                    new XRect(XUnit.FromPoint(0), XUnit.FromPoint(20), XUnit.FromPoint(page.Width.Point), XUnit.FromPoint(30)),
+                    new XRect(XUnit.FromPoint(0).Point, XUnit.FromPoint(20).Point, XUnit.FromPoint(page.Width.Point).Point, XUnit.FromPoint(30).Point),
                     XStringFormats.Center);
 
                 // Table setup
@@ -81,13 +95,13 @@ namespace Charts
                 // Draw header background
                 for (int i = 0; i < headers.Length; i++)
                 {
-                    gfx.DrawRectangle(XBrushes.LightGray, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
-                        XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                    gfx.DrawRectangle(XBrushes.LightGray, XUnit.FromPoint(x + i * cellWidth).Point, XUnit.FromPoint(y).Point,
+                        XUnit.FromPoint(cellWidth).Point, XUnit.FromPoint(cellHeight).Point);
                     gfx.DrawString(headers[i], headerFont, XBrushes.Black,
-                        new XRect(XUnit.FromPoint(x + i * cellWidth + 2), XUnit.FromPoint(y + 2),
-                            XUnit.FromPoint(cellWidth - 4), XUnit.FromPoint(cellHeight - 4)), XStringFormats.TopCenter);
-                    gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
-                        XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                        new XRect(XUnit.FromPoint(x + i * cellWidth + 2).Point, XUnit.FromPoint(y + 2).Point,
+                            XUnit.FromPoint(cellWidth - 4).Point, XUnit.FromPoint(cellHeight - 4).Point), XStringFormats.TopCenter);
+                    gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth).Point, XUnit.FromPoint(y).Point,
+                        XUnit.FromPoint(cellWidth).Point, XUnit.FromPoint(cellHeight).Point);
                 }
 
                 // Data Rows
@@ -104,13 +118,13 @@ namespace Charts
                         // Redraw headers on new page
                         for (int i = 0; i < headers.Length; i++)
                         {
-                            gfx.DrawRectangle(XBrushes.LightGray, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
-                                XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                            gfx.DrawRectangle(XBrushes.LightGray, XUnit.FromPoint(x + i * cellWidth).Point, XUnit.FromPoint(y).Point,
+                                XUnit.FromPoint(cellWidth).Point, XUnit.FromPoint(cellHeight).Point);
                             gfx.DrawString(headers[i], headerFont, XBrushes.Black,
-                                new XRect(XUnit.FromPoint(x + i * cellWidth + 2), XUnit.FromPoint(y + 2),
-                                    XUnit.FromPoint(cellWidth - 4), XUnit.FromPoint(cellHeight - 4)), XStringFormats.TopCenter);
-                            gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
-                                XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                                new XRect(XUnit.FromPoint(x + i * cellWidth + 2).Point, XUnit.FromPoint(y + 2).Point,
+                                    XUnit.FromPoint(cellWidth - 4).Point, XUnit.FromPoint(cellHeight - 4).Point), XStringFormats.TopCenter);
+                            gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth).Point, XUnit.FromPoint(y).Point,
+                                XUnit.FromPoint(cellWidth).Point, XUnit.FromPoint(cellHeight).Point);
                         }
                         y += cellHeight;
                     }
@@ -140,12 +154,12 @@ namespace Charts
                         foreach (string line in lines)
                         {
                             gfx.DrawString(line, cellFont, XBrushes.Black,
-                                new XRect(XUnit.FromPoint(x + i * cellWidth + 2), XUnit.FromPoint(currentY),
-                                    XUnit.FromPoint(cellWidth - 4), XUnit.FromPoint(cellHeight - 4)), XStringFormats.TopLeft);
+                                new XRect(XUnit.FromPoint(x + i * cellWidth + 2).Point, XUnit.FromPoint(currentY).Point,
+                                    XUnit.FromPoint(cellWidth - 4).Point, XUnit.FromPoint(cellHeight - 4).Point), XStringFormats.TopLeft);
                             currentY += 10; // Adjust line spacing
                         }
-                        gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth), XUnit.FromPoint(y),
-                            XUnit.FromPoint(cellWidth), XUnit.FromPoint(cellHeight));
+                        gfx.DrawRectangle(XPens.Black, XUnit.FromPoint(x + i * cellWidth).Point, XUnit.FromPoint(y).Point,
+                            XUnit.FromPoint(cellWidth).Point, XUnit.FromPoint(cellHeight).Point);
                     }
                     rowIndex++;
                 }
@@ -251,7 +265,6 @@ namespace Charts
             Response.Write(csv.ToString());
             Response.End();
         }
-
         private string EscapeCsv(string value)
         {
             if (string.IsNullOrEmpty(value)) return "";

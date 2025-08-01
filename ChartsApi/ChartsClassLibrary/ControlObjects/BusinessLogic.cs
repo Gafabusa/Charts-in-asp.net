@@ -117,5 +117,30 @@ namespace ChartsClassLibrary.ControlObjects
         {
             return dbHelper.ExecuteDataTable("sp_GetAllReceivedTransactionsOrdered");
         }
+        // Fetch transaction counts by VendorCode
+        public DataTable GetTransactionCountsByVendorCode()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetTransactionCountsByVendorCode");
+        }
+        //get most recent transactions
+        public DataTable GetMostRecentTransactions()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetMostRecentTransactions");
+        }
+        // Fetch customer type distribution
+        public System.Data.DataTable GetCustomerTypeDistribution()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetCustomerTypeDistribution");
+        }
+        //get status distribution
+        public DataTable GetStatusDistribution()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetStatusDistribution");
+        }
+        //hourly transactions
+        public DataTable GetTransactionsPerHour()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetTransactionsPerHour");
+        }
     }
 }
