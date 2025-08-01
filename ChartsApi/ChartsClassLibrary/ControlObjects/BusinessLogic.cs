@@ -15,7 +15,28 @@ namespace ChartsClassLibrary.ControlObjects
         {
             dbHelper = new DatabaseHelper();
         }
-
+        // Authenticate admin user
+        public DataTable AdminLogin(string email, string password)
+        {
+            object[] parameters = { email, password};
+            return dbHelper.ExecuteDataTable("sp_AdminLogin", parameters);
+        }
+        // Create a new user
+        public DataTable CreateUser(string fullName, string email, string hashedPassword, int roleId)
+        {
+            object[] parameters = { fullName, email, hashedPassword, roleId };
+            return dbHelper.ExecuteDataTable("sp_CreateUser", parameters);
+        }
+        //get all roles
+        public DataTable GetAllRoles()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetAllRoles");
+        }
+        //get all users
+        public DataTable GetAllNonAdminUsers()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetAllNonAdminUsers");
+        }
         // Inserting the CSV file data into the database
         public void InsertReceivedTransaction(ReceivedTransactionDTO data)
         {
@@ -89,7 +110,7 @@ namespace ChartsClassLibrary.ControlObjects
             };
 
             return dbHelper.ExecuteDataTable("sp_FilterReceivedTransactions", parameters);
-        }
+        }      
         // Fetch all transactions
         public DataTable GetAllReceivedTransactions()
         {

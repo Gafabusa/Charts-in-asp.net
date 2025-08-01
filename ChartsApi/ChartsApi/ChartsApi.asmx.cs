@@ -21,6 +21,30 @@ namespace ChartsApi
         {
             businessLogic = new BusinessLogic();
         }
+        //authenticate admin
+        [WebMethod]
+        public DataTable AdminLogin(string email, string password)
+        {
+            return businessLogic.AdminLogin(email, password);
+        }
+        //create users
+        [WebMethod]
+        public DataTable CreateUser(string fullName, string email, string hashedPassword, int roleId)
+        {
+            return businessLogic.CreateUser(fullName, email, hashedPassword, roleId);
+        }
+        //get all roles
+        [WebMethod]
+        public DataTable GetAllRoles()
+        {
+            return businessLogic.GetAllRoles();
+        }
+        //get all users
+        [WebMethod]
+        public DataTable GetAllNonAdminUsers()
+        {
+            return businessLogic.GetAllNonAdminUsers();
+        }
         //inserting the csv file data in the db
         [WebMethod]
         public void InsertReceivedTransactionFromAPI(ReceivedTransactionDTO data)

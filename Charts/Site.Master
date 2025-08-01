@@ -1,188 +1,195 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Charts.SiteMaster" %>
-<%@ Register Assembly="System.Web.DataVisualization" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+﻿        <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Charts.SiteMaster" %>
+        <%@ Register Assembly="System.Web.DataVisualization" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Analytics Dashboard</title>
-    <asp:PlaceHolder runat="server">
+        <!DOCTYPE html>
+        <html lang="en">
+        <head runat="server">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%: Page.Title %> - Analytics Dashboard</title>
+        <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        </asp:PlaceHolder>
+        <webopt:bundlereference runat="server" path="~/Content/css" />
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
-    <style>
+        <style>
         .active-sidebar {
-            background-color: #0d6efd !important; /* Bootstrap primary */
-            color: #fff !important;
+        background-color: #0d6efd !important; /* Bootstrap primary */
+        color: #fff !important;
         }
 
         .hover-bg-primary:hover {
-            background-color: #e6f0ff !important;
+        background-color: #e6f0ff !important;
         }
 
         /* Fix the navbar */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1030; /* Ensure navbar is above other content */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030; /* Ensure navbar is above other content */
         }
 
         /* Fix the sidebar */
         .sidebar {
-            position: fixed;
-            top: 56px; /* Adjust based on navbar height (Bootstrap navbar is typically ~56px) */
-            bottom: 0;
-            left: 0;
-            width: 250px; /* Match col-md-3/col-lg-2 width */
-            z-index: 1020; /* Below navbar but above content */
-            overflow-y: auto; /* Allow scrolling if sidebar content is long */
+        position: fixed;
+        top: 56px; /* Adjust based on navbar height (Bootstrap navbar is typically ~56px) */
+        bottom: 0;
+        left: 0;
+        width: 250px; /* Match col-md-3/col-lg-2 width */
+        z-index: 1020; /* Below navbar but above content */
+        overflow-y: auto; /* Allow scrolling if sidebar content is long */
         }
 
         /* Adjust main content to avoid overlap */
         .main-content {
-            margin-left: 250px; /* Match sidebar width */
-            margin-top: 56px; /* Match navbar height */
-            padding: 20px;
-            min-height: calc(100vh - 56px - 60px); /* Account for navbar and footer */
+        margin-left: 250px; /* Match sidebar width */
+        margin-top: 56px; /* Match navbar height */
+        padding: 20px;
+        min-height: calc(100vh - 56px - 60px); /* Account for navbar and footer */
         }
 
         /* Ensure footer stays at bottom */
         .footer {
-            position: relative;
-            z-index: 1010;
+        position: relative;
+        z-index: 1010;
         }
 
         /* Responsive adjustments */
         @media (max-width: 767.98px) {
-            .sidebar {
-                position: static;
-                width: 100%;
-                top: 0;
-            }
-            .main-content {
-                margin-left: 0;
-                margin-top: 56px; /* Only account for navbar */
-            }
+        .sidebar {
+        position: static;
+        width: 100%;
+        top: 0;
         }
-    </style>
-</head>
-<body class="bg-light">
-    <form runat="server">
+        .main-content {
+        margin-left: 0;
+        margin-top: 56px; /* Only account for navbar */
+        }
+        }
+        </style>
+        </head>
+        <body class="bg-light">
+        <form runat="server">
         <asp:ScriptManager runat="server">
-            <Scripts>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-            </Scripts>
+        <Scripts>
+        <asp:ScriptReference Name="MsAjaxBundle" />
+        <asp:ScriptReference Name="jquery" />
+        <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+        <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+        <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+        <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+        <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+        <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+        <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+        <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+        <asp:ScriptReference Name="WebFormsBundle" />
+        </Scripts>
         </asp:ScriptManager>
         <!-- Top Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient shadow-sm">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold text-white d-flex align-items-center" runat="server" href="~/">
-                    <i class="bi bi-graph-up me-2 fs-4"></i>
-                    <span class="fs-4">Analytics Dashboard</span>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <div class="input-group w-auto mt-2 mt-lg-0">
-                                <asp:DropDownList ID="ddlExportFormat" runat="server" CssClass="form-select form-select-sm border-0 shadow-sm">
-                                    <asp:ListItem Value="" Text="Export Format" />
-                                    <asp:ListItem Value="pdf" Text="PDF" />
-                                    <asp:ListItem Value="csv" Text="CSV" />
-                                </asp:DropDownList>
-                                <asp:Button ID="btnExport" runat="server" Text="Export" 
-                                    CssClass="btn btn-light btn-sm border-0 shadow-sm fw-bold" 
-                                    OnClick="btnExport_Click" />
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-white d-flex align-items-center" runat="server" href="~/">
+        <i class="bi bi-graph-up me-2 fs-4"></i>
+        <span class="fs-4">Analytics Dashboard</span>
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+        <div class="input-group w-auto mt-2 mt-lg-0">
+        <asp:DropDownList ID="ddlExportFormat" runat="server" CssClass="form-select form-select-sm border-0 shadow-sm">
+        <asp:ListItem Value="" Text="Export Format" />
+        <asp:ListItem Value="pdf" Text="PDF" />
+        <asp:ListItem Value="csv" Text="CSV" />
+        </asp:DropDownList>
+        <asp:Button ID="btnExport" runat="server" Text="Export" 
+        CssClass="btn btn-light btn-sm border-0 shadow-sm fw-bold" 
+        OnClick="btnExport_Click" />
+        </div>
+        </li>
+        </ul>
+        </div>
+        </div>
         </nav>
         <div class="container-fluid">
-            <div class="row g-0">
-                <!-- Sidebar -->
-                <div class="col-md-3 col-lg-2 sidebar">
-                    <div class="bg-white shadow-sm h-100 d-flex flex-column">
-                        <div class="pt-4 pb-4 px-3 flex-grow-1">
-                            <ul class="nav flex-column">
-                                <li class="nav-item mb-2">
-                                    <a id="lnkDashboard" class="nav-link align-items-center py-2 px-3 text-dark fw-semibold" 
-                                       href="~/Admin/Dashboard.aspx" runat="server">
-                                        <i class="bi bi-speedometer2 me-2"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item mb-2">
-                                    <a id="lnkFilters" class="nav-link text-dark rounded d-flex align-items-center py-2 px-3 hover-bg-light" 
-                                       href="~/Admin/Filters.aspx" runat="server">
-                                        <i class="bi bi-filter me-2"></i>
-                                        <span>Filters</span>
-                                    </a>
-                                </li>
-                            </ul>                                                    
-                        </div>
-                    </div>
-                </div>
-                <!-- Main Content -->
-                <div class="col-md-9 col-lg-10 main-content">
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
-            </div>
+        <div class="row g-0">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 sidebar">
+        <div class="bg-white shadow-sm h-100 d-flex flex-column">
+        <div class="pt-4 pb-4 px-3 flex-grow-1">
+        <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+        <a id="lnkDashboard" class="nav-link align-items-center py-2 px-3 text-dark fw-semibold" 
+        href="~/Admin/Dashboard.aspx" runat="server">
+        <i class="bi bi-speedometer2 me-2"></i>
+        <span>Dashboard</span>
+        </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a id="lnkFilters" class="nav-link text-dark rounded d-flex align-items-center py-2 px-3 hover-bg-light" 
+        href="~/Admin/Filters.aspx" runat="server">
+        <i class="bi bi-filter me-2"></i>
+        <span>Filters</span>
+        </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a id="A1" class="nav-link text-dark rounded d-flex align-items-center py-2 px-3 hover-bg-light" 
+        href="~/Admin/Users/CreateUser.aspx" runat="server">
+        <i class="bi bi-filter me-2"></i>
+        <span>Users</span>
+        </a>
+        </li>
+        </ul>                                                    
+        </div>
+        </div>
+        </div>
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10 main-content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+        </div>
+        </div>
         </div>
         <footer class="bg-dark text-white py-3 footer">
-            <div class="container-fluid">
-                <div class="row align-items-center">
+        <div class="container-fluid">
+        <div class="row align-items-center">
                     
-                </div>
-            </div>
+        </div>
+        </div>
         </footer>
-    </form>   
-    <asp:PlaceHolder runat="server">
+        </form>   
+        <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
-    <script>
+        </asp:PlaceHolder>
+        <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const currentPage = window.location.pathname.split('/').pop().toLowerCase();
-            const navLinks = document.querySelectorAll('.nav-link');
+        const currentPage = window.location.pathname.split('/').pop().toLowerCase();
+        const navLinks = document.querySelectorAll('.nav-link');
 
-            navLinks.forEach(link => {
-                const linkHref = link.getAttribute('href')?.toLowerCase() || '';
-                if (linkHref.endsWith(currentPage)) {
-                    link.classList.add('active-sidebar');
-                } else {
-                    link.classList.remove('active-sidebar');
-                }
-            });
-            // Dropdown improvement
-            const select = document.getElementById('ddlExportFormat');
-            if (select) {
-                select.addEventListener('focus', function () {
-                    this.parentElement.classList.add('shadow');
-                });
-                select.addEventListener('blur', function () {
-                    this.parentElement.classList.remove('shadow');
-                });
-            }
+        navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href')?.toLowerCase() || '';
+        if (linkHref.endsWith(currentPage)) {
+        link.classList.add('active-sidebar');
+        } else {
+        link.classList.remove('active-sidebar');
+        }
         });
-    </script>
-</body>
-</html>
+        // Dropdown improvement
+        const select = document.getElementById('ddlExportFormat');
+        if (select) {
+        select.addEventListener('focus', function () {
+        this.parentElement.classList.add('shadow');
+        });
+        select.addEventListener('blur', function () {
+        this.parentElement.classList.remove('shadow');
+        });
+        }
+        });
+        </script>
+        </body>
+        </html>

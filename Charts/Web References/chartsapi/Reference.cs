@@ -30,6 +30,14 @@ namespace Charts.chartsapi {
     [System.Web.Services.WebServiceBindingAttribute(Name="ChartsApiSoap", Namespace="http://tempuri.org/")]
     public partial class ChartsApi : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback AdminLoginOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CreateUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllRolesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllNonAdminUsersOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InsertReceivedTransactionFromAPIOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetTransactionCountsByRecordDateOperationCompleted;
@@ -95,6 +103,18 @@ namespace Charts.chartsapi {
         }
         
         /// <remarks/>
+        public event AdminLoginCompletedEventHandler AdminLoginCompleted;
+        
+        /// <remarks/>
+        public event CreateUserCompletedEventHandler CreateUserCompleted;
+        
+        /// <remarks/>
+        public event GetAllRolesCompletedEventHandler GetAllRolesCompleted;
+        
+        /// <remarks/>
+        public event GetAllNonAdminUsersCompletedEventHandler GetAllNonAdminUsersCompleted;
+        
+        /// <remarks/>
         public event InsertReceivedTransactionFromAPICompletedEventHandler InsertReceivedTransactionFromAPICompleted;
         
         /// <remarks/>
@@ -132,6 +152,126 @@ namespace Charts.chartsapi {
         
         /// <remarks/>
         public event GetTransactionsPerHourCompletedEventHandler GetTransactionsPerHourCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AdminLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable AdminLogin(string email, string password) {
+            object[] results = this.Invoke("AdminLogin", new object[] {
+                        email,
+                        password});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AdminLoginAsync(string email, string password) {
+            this.AdminLoginAsync(email, password, null);
+        }
+        
+        /// <remarks/>
+        public void AdminLoginAsync(string email, string password, object userState) {
+            if ((this.AdminLoginOperationCompleted == null)) {
+                this.AdminLoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAdminLoginOperationCompleted);
+            }
+            this.InvokeAsync("AdminLogin", new object[] {
+                        email,
+                        password}, this.AdminLoginOperationCompleted, userState);
+        }
+        
+        private void OnAdminLoginOperationCompleted(object arg) {
+            if ((this.AdminLoginCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AdminLoginCompleted(this, new AdminLoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable CreateUser(string fullName, string email, string hashedPassword, int roleId) {
+            object[] results = this.Invoke("CreateUser", new object[] {
+                        fullName,
+                        email,
+                        hashedPassword,
+                        roleId});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateUserAsync(string fullName, string email, string hashedPassword, int roleId) {
+            this.CreateUserAsync(fullName, email, hashedPassword, roleId, null);
+        }
+        
+        /// <remarks/>
+        public void CreateUserAsync(string fullName, string email, string hashedPassword, int roleId, object userState) {
+            if ((this.CreateUserOperationCompleted == null)) {
+                this.CreateUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateUserOperationCompleted);
+            }
+            this.InvokeAsync("CreateUser", new object[] {
+                        fullName,
+                        email,
+                        hashedPassword,
+                        roleId}, this.CreateUserOperationCompleted, userState);
+        }
+        
+        private void OnCreateUserOperationCompleted(object arg) {
+            if ((this.CreateUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateUserCompleted(this, new CreateUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllRoles", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllRoles() {
+            object[] results = this.Invoke("GetAllRoles", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllRolesAsync() {
+            this.GetAllRolesAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllRolesAsync(object userState) {
+            if ((this.GetAllRolesOperationCompleted == null)) {
+                this.GetAllRolesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllRolesOperationCompleted);
+            }
+            this.InvokeAsync("GetAllRoles", new object[0], this.GetAllRolesOperationCompleted, userState);
+        }
+        
+        private void OnGetAllRolesOperationCompleted(object arg) {
+            if ((this.GetAllRolesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllRolesCompleted(this, new GetAllRolesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllNonAdminUsers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllNonAdminUsers() {
+            object[] results = this.Invoke("GetAllNonAdminUsers", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllNonAdminUsersAsync() {
+            this.GetAllNonAdminUsersAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllNonAdminUsersAsync(object userState) {
+            if ((this.GetAllNonAdminUsersOperationCompleted == null)) {
+                this.GetAllNonAdminUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllNonAdminUsersOperationCompleted);
+            }
+            this.InvokeAsync("GetAllNonAdminUsers", new object[0], this.GetAllNonAdminUsersOperationCompleted, userState);
+        }
+        
+        private void OnGetAllNonAdminUsersOperationCompleted(object arg) {
+            if ((this.GetAllNonAdminUsersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllNonAdminUsersCompleted(this, new GetAllNonAdminUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/InsertReceivedTransactionFromAPI", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -946,6 +1086,110 @@ namespace Charts.chartsapi {
             }
             set {
                 this.reasonField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void AdminLoginCompletedEventHandler(object sender, AdminLoginCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AdminLoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AdminLoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void CreateUserCompletedEventHandler(object sender, CreateUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetAllRolesCompletedEventHandler(object sender, GetAllRolesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllRolesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllRolesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetAllNonAdminUsersCompletedEventHandler(object sender, GetAllNonAdminUsersCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllNonAdminUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllNonAdminUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
             }
         }
     }
