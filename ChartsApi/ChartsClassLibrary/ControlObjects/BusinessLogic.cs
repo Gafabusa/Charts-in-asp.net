@@ -21,6 +21,12 @@ namespace ChartsClassLibrary.ControlObjects
             object[] parameters = { email, password};
             return dbHelper.ExecuteDataTable("sp_AdminLogin", parameters);
         }
+        //authenticate users
+        public DataTable LoginUser(string email, string hashedPassword)
+        {
+            object[] parameters = { email, hashedPassword };
+            return dbHelper.ExecuteDataTable("sp_LoginUser", parameters);
+        }
         // Create a new user
         public DataTable CreateUser(string fullName, string email, string hashedPassword, int roleId)
         {
@@ -31,6 +37,12 @@ namespace ChartsClassLibrary.ControlObjects
         public DataTable GetAllRoles()
         {
             return dbHelper.ExecuteDataTable("sp_GetAllRoles");
+        }
+        //get role by id
+        public DataTable GetRoleById(int roleId)
+        {
+            object[] parameters = { roleId };
+            return dbHelper.ExecuteDataTable("sp_GetRoleById", parameters);
         }
         //get all users
         public DataTable GetAllNonAdminUsers()
@@ -162,6 +174,16 @@ namespace ChartsClassLibrary.ControlObjects
         public DataTable GetTransactionsPerHour()
         {
             return dbHelper.ExecuteDataTable("sp_GetTransactionsPerHour");
+        }
+        //get transactions by Utility Code
+        public DataTable GetUtilityCodeDistribution()
+        {
+            return dbHelper.ExecuteDataTable("sp_GetUtilityCodeDistribution");
+        }
+        //get transactions by UtilityCode
+        public DataTable GetAllTransactionsByUtilityCode(string utilityCode = null)
+        {
+            return dbHelper.ExecuteDataTable("sp_GetAllTransactionsByUtilityCode", utilityCode);
         }
     }
 }

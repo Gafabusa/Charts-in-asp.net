@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 
 namespace Charts
@@ -15,6 +16,13 @@ namespace Charts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+                if (Session["UserId"] == null)
+                {
+                    Response.Redirect("~/Login/Login.aspx");
+                }
+            }
             // Set active class based on the current page
             string currentPath = Request.Url.AbsolutePath.ToLower();
             if (currentPath.Contains("dashboard.aspx"))
@@ -30,6 +38,17 @@ namespace Charts
                 lnkDashboard.Attributes["class"] = "nav-link text-dark rounded d-flex align-items-center py-2 px-3 bg-opacity-10";
                 lnkFilters.Attributes["class"] = "nav-link text-dark rounded d-flex align-items-center py-2 px-3 bg-opacity-10";
             }
+        }
+        //logout functionality
+        protected void lnkLogout_ServerClick(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("~/Login/Login.aspx");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.MinValue);
+            Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
         }
 
         protected void btnExport_Click(object sender, EventArgs e)

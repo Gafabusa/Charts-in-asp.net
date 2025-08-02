@@ -6,7 +6,7 @@
 <div class="card shadow-lg border-0">
     <div class="card-body p-5">
         <div class="text-center mb-4">
-            <h2 class="fw-bold text-primary mb-2">Welcome aboard</h2>
+            <h2 class="fw-bold text-primary mb-2">Welcome back</h2>
             <p class="text-muted">Sign in to your account</p>
         </div>
         <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="alert alert-danger alert-dismissible fade show mb-3">

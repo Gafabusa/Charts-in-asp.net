@@ -21,9 +21,7 @@ namespace Charts.Admin.Users
             {
                 LoadRoles();
                 LoadUsers();
-                // Set up the master page for dashboard
                 var master = (SiteMaster)this.Master;
-                // Show landing page by default
                 pnlLanding.Visible = true;
                 pnlCreateUserForm.Visible = false;
             }
@@ -31,7 +29,6 @@ namespace Charts.Admin.Users
 
         protected void btnShowCreateUserForm_Click(object sender, EventArgs e)
         {
-            // Hide landing page and show form
             pnlLanding.Visible = false;
             pnlCreateUserForm.Visible = true;
             // Set focus to the first input field
@@ -149,7 +146,7 @@ namespace Charts.Admin.Users
                 {
                     builder.Append(b.ToString("x2"));
                 }
-                return builder.ToString();
+                return "SHA256" + builder.ToString();
             }
         }
 

@@ -24,6 +24,28 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="LoginUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hashedPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="CreateUser">
         <s:complexType>
           <s:sequence>
@@ -55,6 +77,27 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetAllRolesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoleById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="roleId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoleByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRoleByIdResult">
               <s:complexType>
                 <s:sequence>
                   <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
@@ -354,6 +397,44 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetUtilityCodeDistribution">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUtilityCodeDistributionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUtilityCodeDistributionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTransactionsByUtilityCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="utilityCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTransactionsByUtilityCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllTransactionsByUtilityCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AdminLoginSoapIn">
@@ -361,6 +442,12 @@
   </wsdl:message>
   <wsdl:message name="AdminLoginSoapOut">
     <wsdl:part name="parameters" element="tns:AdminLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
   </wsdl:message>
   <wsdl:message name="CreateUserSoapIn">
     <wsdl:part name="parameters" element="tns:CreateUser" />
@@ -373,6 +460,12 @@
   </wsdl:message>
   <wsdl:message name="GetAllRolesSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRoleById" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRoleByIdResponse" />
   </wsdl:message>
   <wsdl:message name="GetAllNonAdminUsersSoapIn">
     <wsdl:part name="parameters" element="tns:GetAllNonAdminUsers" />
@@ -458,10 +551,26 @@
   <wsdl:message name="GetTransactionsPerHourSoapOut">
     <wsdl:part name="parameters" element="tns:GetTransactionsPerHourResponse" />
   </wsdl:message>
+  <wsdl:message name="GetUtilityCodeDistributionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUtilityCodeDistribution" />
+  </wsdl:message>
+  <wsdl:message name="GetUtilityCodeDistributionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUtilityCodeDistributionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTransactionsByUtilityCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionsByUtilityCode" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTransactionsByUtilityCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionsByUtilityCodeResponse" />
+  </wsdl:message>
   <wsdl:portType name="ChartsApiSoap">
     <wsdl:operation name="AdminLogin">
       <wsdl:input message="tns:AdminLoginSoapIn" />
       <wsdl:output message="tns:AdminLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <wsdl:input message="tns:LoginUserSoapIn" />
+      <wsdl:output message="tns:LoginUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="CreateUser">
       <wsdl:input message="tns:CreateUserSoapIn" />
@@ -470,6 +579,10 @@
     <wsdl:operation name="GetAllRoles">
       <wsdl:input message="tns:GetAllRolesSoapIn" />
       <wsdl:output message="tns:GetAllRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleById">
+      <wsdl:input message="tns:GetRoleByIdSoapIn" />
+      <wsdl:output message="tns:GetRoleByIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetAllNonAdminUsers">
       <wsdl:input message="tns:GetAllNonAdminUsersSoapIn" />
@@ -527,11 +640,28 @@
       <wsdl:input message="tns:GetTransactionsPerHourSoapIn" />
       <wsdl:output message="tns:GetTransactionsPerHourSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUtilityCodeDistribution">
+      <wsdl:input message="tns:GetUtilityCodeDistributionSoapIn" />
+      <wsdl:output message="tns:GetUtilityCodeDistributionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionsByUtilityCode">
+      <wsdl:input message="tns:GetAllTransactionsByUtilityCodeSoapIn" />
+      <wsdl:output message="tns:GetAllTransactionsByUtilityCodeSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ChartsApiSoap" type="tns:ChartsApiSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AdminLogin">
       <soap:operation soapAction="http://tempuri.org/AdminLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://tempuri.org/LoginUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -550,6 +680,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllRoles">
       <soap:operation soapAction="http://tempuri.org/GetAllRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleById">
+      <soap:operation soapAction="http://tempuri.org/GetRoleById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -683,11 +822,38 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUtilityCodeDistribution">
+      <soap:operation soapAction="http://tempuri.org/GetUtilityCodeDistribution" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionsByUtilityCode">
+      <soap:operation soapAction="http://tempuri.org/GetAllTransactionsByUtilityCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ChartsApiSoap12" type="tns:ChartsApiSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AdminLogin">
       <soap12:operation soapAction="http://tempuri.org/AdminLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap12:operation soapAction="http://tempuri.org/LoginUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -706,6 +872,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllRoles">
       <soap12:operation soapAction="http://tempuri.org/GetAllRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleById">
+      <soap12:operation soapAction="http://tempuri.org/GetRoleById" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -832,6 +1007,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetTransactionsPerHour">
       <soap12:operation soapAction="http://tempuri.org/GetTransactionsPerHour" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUtilityCodeDistribution">
+      <soap12:operation soapAction="http://tempuri.org/GetUtilityCodeDistribution" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionsByUtilityCode">
+      <soap12:operation soapAction="http://tempuri.org/GetAllTransactionsByUtilityCode" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

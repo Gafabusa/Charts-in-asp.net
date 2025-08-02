@@ -15,19 +15,14 @@ namespace Charts.Login
                 pnlAlert.Visible = false;
             }
         }
-
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             try
             {
                 string email = txtEmail.Text.Trim();
                 string password = txtPassword.Text.Trim();
-
-                // Call the API with raw password
                 var api = new ChartsApi();
                 DataTable dt = api.AdminLogin(email, password);
-
-                // Check if valid user data is returned (non-NULL UserId)
                 if (dt.Rows.Count > 0 && dt.Rows[0]["UserId"] != DBNull.Value)
                 {
                     Session["UserId"] = dt.Rows[0]["UserId"];

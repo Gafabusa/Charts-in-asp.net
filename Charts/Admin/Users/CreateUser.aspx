@@ -8,9 +8,9 @@
     <!-- Landing Page with Button and Users Table -->
     <asp:Panel ID="pnlLanding" runat="server" Visible="true">
     <div class="d-flex justify-content-between align-items-start mb-4">
-    <h4 class="fw-bold text-primary">System Users</h4>
+    <h4 class="fw-bold text-primary">System Utilities</h4>
     <asp:Button ID="btnShowCreateUserForm" runat="server"
-    Text="Create New User"
+    Text="Create New Utility"
     CssClass="btn btn-success btn-lg px-4"
     OnClick="btnShowCreateUserForm_Click" />
     </div>
@@ -19,21 +19,21 @@
     OnRowCommand="gvUsers_RowCommand" DataKeyNames="UserId">
     <Columns>
     <asp:BoundField DataField="UserId" HeaderText="User ID" ReadOnly="True" />
-    <asp:BoundField DataField="FullName" HeaderText="Full Name" />
+    <asp:BoundField DataField="FullName" HeaderText="Utility User" />
     <asp:BoundField DataField="Email" HeaderText="Email" />
-    <asp:BoundField DataField="RoleName" HeaderText="Role" />
+    <asp:BoundField DataField="RoleName" HeaderText="Utilities" />
     <asp:TemplateField HeaderText="Actions">
     <ItemTemplate>
     <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-primary btn-sm"
     CommandName="EditUser" CommandArgument='<%# Eval("UserId") %>' />
     <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-danger btn-sm"
     CommandName="DeleteUser" CommandArgument='<%# Eval("UserId") %>'
-    OnClientClick="return confirm('Are you sure you want to delete this user?');" />
+    OnClientClick="return confirm('Are you sure you want to delete this utility user?');" />
     </ItemTemplate>
     </asp:TemplateField>
     </Columns>
     <EmptyDataTemplate>
-    <div class="text-center">No users found.</div>
+    <div class="text-center">No utilities found.</div>
     </EmptyDataTemplate>
     </asp:GridView>
     </asp:Panel>
@@ -44,8 +44,8 @@
     <div class="card shadow border-0 mt-4">
     <div class="card-body p-4">
     <div class="text-center mb-3">
-    <h4 class="fw-bold text-primary mb-1">Create User</h4>
-    <p class="text-muted small">Add a new system user</p>
+    <h4 class="fw-bold text-primary mb-1">Create Utility</h4>
+    <p class="text-muted small">Add a new system utility</p>
     </div>
     <!-- Alert Panel -->
     <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="alert alert-dismissible fade show mb-3">
@@ -77,7 +77,7 @@
     <!-- Action Buttons -->
     <div class="d-flex justify-content-center gap-2">
     <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancel_Click" CausesValidation="false" UseSubmitBehavior="false" />
-    <asp:Button ID="btnSave" runat="server" Text="Create User" CssClass="btn btn-success px-4" OnClick="btnSave_Click" />
+    <asp:Button ID="btnSave" runat="server" Text="Create Utility" CssClass="btn btn-success px-4" OnClick="btnSave_Click" />
     </div>
     </div>
     </div>

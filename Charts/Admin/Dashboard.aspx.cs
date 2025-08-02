@@ -17,15 +17,20 @@ namespace Charts.Admin
             if (!IsPostBack)
             {
                 PopulateVendorCodes();
+                PopulateUtilityCodes(); // New method to populate UtilityCode dropdown
                 LoadTotalTransactions();
                 SetupSalesChart();
                 SetupVendorBarChart();
+                SetupUtilityPieChart(); // New method for Utilities tab
+                SetupUtilityBarChart(); // New method for Utilities tab
                 LoadRecentTransactions();
                 gvRecentTransactions.RowDataBound += gvRecentTransactions_RowDataBound;
+                LoadUtilityTransactions(); // New method to load initial transactions
 
-                TimeZoneInfo eatTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. Africa Standard Time"); // Use Windows time zone ID for EAT (UTC+3)
+                // Update to current date and time: 10:53 AM EAT, August 02, 2025
+                TimeZoneInfo eatTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. Africa Standard Time"); // UTC+3
                 DateTime eatTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, eatTimeZone);
-                hfServerTime.Value = eatTime.ToString("dd/MM/yyyy,HH:mm:ss");
+                hfServerTime.Value = eatTime.ToString("dd/MM/yyyy,HH:mm:ss"); // 02/08/2025,10:53:00
             }
         }
 
@@ -34,6 +39,11 @@ namespace Charts.Admin
             LoadTotalTransactions();
             SetupSalesChart();
             SetupVendorBarChart();
+        }
+
+        protected void ddlUtilityCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadUtilityTransactions();
         }
 
         private void PopulateVendorCodes()
@@ -65,6 +75,35 @@ namespace Charts.Admin
             }
         }
 
+        private void PopulateUtilityCodes()
+        {
+            try
+            {
+                chartsapi.ChartsApi api = new chartsapi.ChartsApi();
+                DataTable dt = api.GetUtilityCodeDistribution(); // Use aggregated data for unique UtilityCodes
+                var utilityCodes = dt.AsEnumerable()
+                    .Select(row => row.Field<string>("UtilityCode"))
+                    .Where(v => !string.IsNullOrEmpty(v))
+                    .Distinct()
+                    .OrderBy(v => v)
+                    .ToList();
+
+                ddlUtilityCode.Items.Clear();
+                ddlUtilityCode.Items.Add(new ListItem("All", ""));
+                foreach (var utilityCode in utilityCodes)
+                {
+                    ddlUtilityCode.Items.Add(new ListItem(utilityCode, utilityCode));
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "Error loading utility codes: " + ex.Message;
+                lblMessage.CssClass = "text-danger mt-2 d-block";
+                lblMessage.Visible = true;
+                System.Diagnostics.Debug.WriteLine($"Error in PopulateUtilityCodes: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            }
+        }
+
         private void LoadTotalTransactions()
         {
             try
@@ -79,7 +118,9 @@ namespace Charts.Admin
             }
             catch (Exception ex)
             {
-                lblTotalTransactions.Text = "Error";
+                lblMessage.Text = "Error loading total transactions: " + ex.Message;
+                lblMessage.CssClass = "text-danger mt-2 d-block";
+                lblMessage.Visible = true;
                 System.Diagnostics.Debug.WriteLine($"Error in LoadTotalTransactions: {ex.Message}\nStack Trace: {ex.StackTrace}");
             }
         }
@@ -152,6 +193,64 @@ namespace Charts.Admin
             hfVendorChartData.Value = JsonConvert.SerializeObject(chartData);
         }
 
+        private void SetupUtilityPieChart()
+        {
+            chartsapi.ChartsApi api = new chartsapi.ChartsApi();
+            DataTable dt = api.GetUtilityCodeDistribution();
+
+            var labels = new System.Collections.Generic.List<string>();
+            var data = new System.Collections.Generic.List<int>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string utilityCode = row.Field<string>("UtilityCode");
+                int transactionCount = row.Field<int>("TransactionCount");
+                if (!string.IsNullOrEmpty(utilityCode))
+                {
+                    labels.Add(utilityCode);
+                    data.Add(transactionCount);
+                }
+            }
+
+            var chartData = new
+            {
+                labels = labels,
+                data = data,
+                title = "UtilityCode Distribution"
+            };
+
+            hfUtilityPieChartData.Value = JsonConvert.SerializeObject(chartData);
+        }
+
+        private void SetupUtilityBarChart()
+        {
+            chartsapi.ChartsApi api = new chartsapi.ChartsApi();
+            DataTable dt = api.GetUtilityCodeDistribution();
+
+            var labels = new System.Collections.Generic.List<string>();
+            var data = new System.Collections.Generic.List<int>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string utilityCode = row.Field<string>("UtilityCode");
+                int transactionCount = row.Field<int>("TransactionCount");
+                if (!string.IsNullOrEmpty(utilityCode))
+                {
+                    labels.Add(utilityCode);
+                    data.Add(transactionCount);
+                }
+            }
+
+            var chartData = new
+            {
+                labels = labels,
+                data = data,
+                title = "UtilityCode Distribution"
+            };
+
+            hfUtilityBarChartData.Value = JsonConvert.SerializeObject(chartData);
+        }
+
         private void LoadRecentTransactions()
         {
             try
@@ -174,6 +273,34 @@ namespace Charts.Admin
             {
                 lblMessage.Text = "Error loading recent transactions: " + ex.Message;
                 lblMessage.Visible = true;
+            }
+        }
+
+        private void LoadUtilityTransactions()
+        {
+            try
+            {
+                chartsapi.ChartsApi api = new chartsapi.ChartsApi();
+                string utilityCode = ddlUtilityCode.SelectedValue;
+                DataTable dt = api.GetAllTransactionsByUtilityCode(utilityCode);
+
+                if (dt.Rows.Count > 0)
+                {
+                    gvUtilityTransactions.DataSource = dt;
+                    gvUtilityTransactions.DataBind();
+                }
+                else
+                {
+                    gvUtilityTransactions.DataSource = null;
+                    gvUtilityTransactions.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "Error loading utility transactions: " + ex.Message;
+                lblMessage.CssClass = "text-danger mt-2 d-block";
+                lblMessage.Visible = true;
+                System.Diagnostics.Debug.WriteLine($"Error in LoadUtilityTransactions: {ex.Message}\nStack Trace: {ex.StackTrace}");
             }
         }
 
@@ -250,12 +377,16 @@ namespace Charts.Admin
                     lblMessage.CssClass = "text-success mt-2 d-block";
                     lblMessage.Visible = true;
 
-                    // Refresh vendor codes, chart, total transactions, and bar chart after upload
+                    // Refresh data after upload
                     PopulateVendorCodes();
+                    PopulateUtilityCodes();
                     LoadTotalTransactions();
                     SetupSalesChart();
                     SetupVendorBarChart();
+                    SetupUtilityPieChart();
+                    SetupUtilityBarChart();
                     LoadRecentTransactions();
+                    LoadUtilityTransactions();
                 }
                 catch (Exception ex)
                 {

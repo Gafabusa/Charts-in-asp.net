@@ -27,6 +27,12 @@ namespace ChartsApi
         {
             return businessLogic.AdminLogin(email, password);
         }
+        //authenticate users
+        [WebMethod]
+        public DataTable LoginUser(string email, string hashedPassword)
+        {
+            return businessLogic.LoginUser(email, hashedPassword);
+        }
         //create users
         [WebMethod]
         public DataTable CreateUser(string fullName, string email, string hashedPassword, int roleId)
@@ -38,6 +44,12 @@ namespace ChartsApi
         public DataTable GetAllRoles()
         {
             return businessLogic.GetAllRoles();
+        }
+        //get role by id
+        [WebMethod]
+        public DataTable GetRoleById(int roleId)
+        {
+            return businessLogic.GetRoleById(roleId);
         }
         //get all users
         [WebMethod]
@@ -124,6 +136,18 @@ namespace ChartsApi
         public DataTable GetTransactionsPerHour()
         {
             return businessLogic.GetTransactionsPerHour();
+        }
+        //get transactions by UtilityCodeDistribution
+        [WebMethod]
+        public DataTable GetUtilityCodeDistribution()
+        {
+            return businessLogic.GetUtilityCodeDistribution();
+        }
+        //get transactions by UtilityCode
+        [WebMethod]
+        public DataTable GetAllTransactionsByUtilityCode(string utilityCode = null)
+        {
+            return businessLogic.GetAllTransactionsByUtilityCode(utilityCode);
         }
     }
 }

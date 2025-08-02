@@ -39,26 +39,31 @@
     <div class="container-fluid py-4">
         <!-- Top-Level Navigation Tabs -->
         <ul class="nav nav-tabs nav-justified mb-4 nav-tabs-fixed" id="mainTabs" role="tablist">
-<li class="nav-item" role="presentation">
-    <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button" role="tab" aria-controls="analytics" aria-selected="true" style="font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
-        Analytics
-    </button>
-</li>
-<li class="nav-item" role="presentation">
-    <button class="nav-link" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
-        Daily
-    </button>
-</li>
-<li class="nav-item" role="presentation">
-    <button class="nav-link" id="hourly-tab" data-bs-toggle="tab" data-bs-target="#hourly" type="button" role="tab" aria-controls="hourly" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
-        Hourly
-    </button>
-</li>
-<li class="nav-item" role="presentation">
-    <button class="nav-link" id="overtime-tab" data-bs-toggle="tab" data-bs-target="#overtime" type="button" role="tab" aria-controls="overtime" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
-        Overtime
-    </button>
-    </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button" role="tab" aria-controls="analytics" aria-selected="true" style="font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
+                    Analytics
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
+                    Daily
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="hourly-tab" data-bs-toggle="tab" data-bs-target="#hourly" type="button" role="tab" aria-controls="hourly" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
+                    Hourly
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="overtime-tab" data-bs-toggle="tab" data-bs-target="#overtime" type="button" role="tab" aria-controls="overtime" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
+                    Overtime
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="utilities-tab" data-bs-toggle="tab" data-bs-target="#utilities" type="button" role="tab" aria-controls="utilities" aria-selected="false" style="color: #495057; font-weight: 500; padding: 10px 20px; border: none; border-radius: 6px;">
+                    Utilities
+                </button>
+            </li>
         </ul>
 
         <!-- Tab Content -->
@@ -256,7 +261,66 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Utilities Tab with UtilityCode Distribution -->
+           <!-- Inside the Utilities tab -->
+<div class="tab-pane fade" id="utilities" role="tabpanel" aria-labelledby="utilities-tab">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0">A piechart showing UtilityCode Distribution</h5>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div class="chart-container position-relative">
+                        <canvas id="utilityPieChart" width="400" height="400"></canvas>
+                        <asp:HiddenField ID="hfUtilityPieChartData" runat="server" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0">UtilityCode Distribution (Bar Chart)</h5>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div class="chart-container position-relative">
+                        <canvas id="utilityBarChart" width="1000" height="400"></canvas>
+                        <asp:HiddenField ID="hfUtilityBarChartData" runat="server" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Filter and GridView -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0">All Transactions by UtilityCode</h5>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <asp:DropDownList ID="ddlUtilityCode" runat="server" CssClass="form-control mb-3" AutoPostBack="true" 
+                                          OnSelectedIndexChanged="ddlUtilityCode_SelectedIndexChanged">
+                            <asp:ListItem Text="All" Value="" />
+                        </asp:DropDownList>
+                    </div>
+                    <div class="table-responsive">
+                        <asp:GridView ID="gvUtilityTransactions" runat="server" CssClass="table table-striped table-bordered" 
+                                      AutoGenerateColumns="true" EmptyDataText="No transactions found for the selected UtilityCode."
+                                      HeaderStyle-CssClass="table-dark" Width="100%">
+                        </asp:GridView>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+        </div>
+</div>
 
         <!-- Chart.js Script -->
         <script src="/Scripts/chart.min.js"></script>
@@ -286,7 +350,6 @@
                 // Sales Chart
                 const hfSalesChartData = document.getElementById('<%= hfSalesChartData.ClientID %>').value;
                 const salesChartData = JSON.parse(hfSalesChartData || '{}');
-
                 const salesCtx = document.getElementById('salesChart').getContext('2d');
                 new Chart(salesCtx, {
                     type: 'bar',
@@ -339,7 +402,6 @@
                 // Vendor Chart
                 const hfVendorChartData = document.getElementById('<%= hfVendorChartData.ClientID %>').value;
                 const vendorChartData = JSON.parse(hfVendorChartData || '{}');
-
                 const vendorCtx = document.getElementById('vendorChart').getContext('2d');
                 new Chart(vendorCtx, {
                     type: 'bar',
@@ -370,6 +432,114 @@
                                 title: {
                                     display: true,
                                     text: 'Vendor Code',
+                                    font: { weight: 'bold' }
+                                },
+                                ticks: {
+                                    autoSkip: false
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Transactions',
+                                    font: { weight: 'bold' }
+                                },
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Utility Pie Chart
+                const hfUtilityPieChartData = document.getElementById('<%= hfUtilityPieChartData.ClientID %>').value;
+                const utilityPieChartData = JSON.parse(hfUtilityPieChartData || '{}');
+                const utilityPieCtx = document.getElementById('utilityPieChart').getContext('2d');
+                new Chart(utilityPieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: utilityPieChartData.labels || [],
+                        datasets: [{
+                            data: utilityPieChartData.data || [],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)', // Red
+                                'rgba(54, 162, 235, 0.6)', // Blue
+                                'rgba(255, 206, 86, 0.6)', // Yellow
+                                'rgba(75, 192, 192, 0.6)', // Teal
+                                'rgba(153, 102, 255, 0.6)' // Purple
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: utilityPieChartData.title || 'UtilityCode Distribution',
+                                font: { size: 20 }
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+
+                // Utility Bar Chart
+                const hfUtilityBarChartData = document.getElementById('<%= hfUtilityBarChartData.ClientID %>').value;
+                const utilityBarChartData = JSON.parse(hfUtilityBarChartData || '{}');
+                const utilityBarCtx = document.getElementById('utilityBarChart').getContext('2d');
+                new Chart(utilityBarCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: utilityBarChartData.labels || [],
+                        datasets: [{
+                            label: 'Transaction Count',
+                            data: utilityBarChartData.data || [],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)', // Red
+                                'rgba(54, 162, 235, 0.6)', // Blue
+                                'rgba(255, 206, 86, 0.6)', // Yellow
+                                'rgba(75, 192, 192, 0.6)', // Teal
+                                'rgba(153, 102, 255, 0.6)' // Purple
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: utilityBarChartData.title || 'UtilityCode Distribution',
+                                font: { size: 20 }
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Utility Code',
                                     font: { weight: 'bold' }
                                 },
                                 ticks: {

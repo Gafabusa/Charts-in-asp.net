@@ -32,9 +32,13 @@ namespace Charts.chartsapi {
         
         private System.Threading.SendOrPostCallback AdminLoginOperationCompleted;
         
+        private System.Threading.SendOrPostCallback LoginUserOperationCompleted;
+        
         private System.Threading.SendOrPostCallback CreateUserOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetAllRolesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetRoleByIdOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetAllNonAdminUsersOperationCompleted;
         
@@ -63,6 +67,10 @@ namespace Charts.chartsapi {
         private System.Threading.SendOrPostCallback GetStatusDistributionOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetTransactionsPerHourOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetUtilityCodeDistributionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllTransactionsByUtilityCodeOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -106,10 +114,16 @@ namespace Charts.chartsapi {
         public event AdminLoginCompletedEventHandler AdminLoginCompleted;
         
         /// <remarks/>
+        public event LoginUserCompletedEventHandler LoginUserCompleted;
+        
+        /// <remarks/>
         public event CreateUserCompletedEventHandler CreateUserCompleted;
         
         /// <remarks/>
         public event GetAllRolesCompletedEventHandler GetAllRolesCompleted;
+        
+        /// <remarks/>
+        public event GetRoleByIdCompletedEventHandler GetRoleByIdCompleted;
         
         /// <remarks/>
         public event GetAllNonAdminUsersCompletedEventHandler GetAllNonAdminUsersCompleted;
@@ -154,6 +168,12 @@ namespace Charts.chartsapi {
         public event GetTransactionsPerHourCompletedEventHandler GetTransactionsPerHourCompleted;
         
         /// <remarks/>
+        public event GetUtilityCodeDistributionCompletedEventHandler GetUtilityCodeDistributionCompleted;
+        
+        /// <remarks/>
+        public event GetAllTransactionsByUtilityCodeCompletedEventHandler GetAllTransactionsByUtilityCodeCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AdminLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataTable AdminLogin(string email, string password) {
             object[] results = this.Invoke("AdminLogin", new object[] {
@@ -181,6 +201,37 @@ namespace Charts.chartsapi {
             if ((this.AdminLoginCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AdminLoginCompleted(this, new AdminLoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LoginUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable LoginUser(string email, string hashedPassword) {
+            object[] results = this.Invoke("LoginUser", new object[] {
+                        email,
+                        hashedPassword});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LoginUserAsync(string email, string hashedPassword) {
+            this.LoginUserAsync(email, hashedPassword, null);
+        }
+        
+        /// <remarks/>
+        public void LoginUserAsync(string email, string hashedPassword, object userState) {
+            if ((this.LoginUserOperationCompleted == null)) {
+                this.LoginUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginUserOperationCompleted);
+            }
+            this.InvokeAsync("LoginUser", new object[] {
+                        email,
+                        hashedPassword}, this.LoginUserOperationCompleted, userState);
+        }
+        
+        private void OnLoginUserOperationCompleted(object arg) {
+            if ((this.LoginUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LoginUserCompleted(this, new LoginUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -243,6 +294,35 @@ namespace Charts.chartsapi {
             if ((this.GetAllRolesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetAllRolesCompleted(this, new GetAllRolesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetRoleById", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetRoleById(int roleId) {
+            object[] results = this.Invoke("GetRoleById", new object[] {
+                        roleId});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetRoleByIdAsync(int roleId) {
+            this.GetRoleByIdAsync(roleId, null);
+        }
+        
+        /// <remarks/>
+        public void GetRoleByIdAsync(int roleId, object userState) {
+            if ((this.GetRoleByIdOperationCompleted == null)) {
+                this.GetRoleByIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetRoleByIdOperationCompleted);
+            }
+            this.InvokeAsync("GetRoleById", new object[] {
+                        roleId}, this.GetRoleByIdOperationCompleted, userState);
+        }
+        
+        private void OnGetRoleByIdOperationCompleted(object arg) {
+            if ((this.GetRoleByIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetRoleByIdCompleted(this, new GetRoleByIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -644,6 +724,62 @@ namespace Charts.chartsapi {
             if ((this.GetTransactionsPerHourCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetTransactionsPerHourCompleted(this, new GetTransactionsPerHourCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetUtilityCodeDistribution", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetUtilityCodeDistribution() {
+            object[] results = this.Invoke("GetUtilityCodeDistribution", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetUtilityCodeDistributionAsync() {
+            this.GetUtilityCodeDistributionAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetUtilityCodeDistributionAsync(object userState) {
+            if ((this.GetUtilityCodeDistributionOperationCompleted == null)) {
+                this.GetUtilityCodeDistributionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUtilityCodeDistributionOperationCompleted);
+            }
+            this.InvokeAsync("GetUtilityCodeDistribution", new object[0], this.GetUtilityCodeDistributionOperationCompleted, userState);
+        }
+        
+        private void OnGetUtilityCodeDistributionOperationCompleted(object arg) {
+            if ((this.GetUtilityCodeDistributionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetUtilityCodeDistributionCompleted(this, new GetUtilityCodeDistributionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllTransactionsByUtilityCode", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllTransactionsByUtilityCode(string utilityCode) {
+            object[] results = this.Invoke("GetAllTransactionsByUtilityCode", new object[] {
+                        utilityCode});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllTransactionsByUtilityCodeAsync(string utilityCode) {
+            this.GetAllTransactionsByUtilityCodeAsync(utilityCode, null);
+        }
+        
+        /// <remarks/>
+        public void GetAllTransactionsByUtilityCodeAsync(string utilityCode, object userState) {
+            if ((this.GetAllTransactionsByUtilityCodeOperationCompleted == null)) {
+                this.GetAllTransactionsByUtilityCodeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllTransactionsByUtilityCodeOperationCompleted);
+            }
+            this.InvokeAsync("GetAllTransactionsByUtilityCode", new object[] {
+                        utilityCode}, this.GetAllTransactionsByUtilityCodeOperationCompleted, userState);
+        }
+        
+        private void OnGetAllTransactionsByUtilityCodeOperationCompleted(object arg) {
+            if ((this.GetAllTransactionsByUtilityCodeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllTransactionsByUtilityCodeCompleted(this, new GetAllTransactionsByUtilityCodeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1118,6 +1254,32 @@ namespace Charts.chartsapi {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void LoginUserCompletedEventHandler(object sender, LoginUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LoginUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LoginUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CreateUserCompletedEventHandler(object sender, CreateUserCompletedEventArgs e);
     
     /// <remarks/>
@@ -1155,6 +1317,32 @@ namespace Charts.chartsapi {
         private object[] results;
         
         internal GetAllRolesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetRoleByIdCompletedEventHandler(object sender, GetRoleByIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetRoleByIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetRoleByIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1497,6 +1685,58 @@ namespace Charts.chartsapi {
         private object[] results;
         
         internal GetTransactionsPerHourCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetUtilityCodeDistributionCompletedEventHandler(object sender, GetUtilityCodeDistributionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetUtilityCodeDistributionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetUtilityCodeDistributionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetAllTransactionsByUtilityCodeCompletedEventHandler(object sender, GetAllTransactionsByUtilityCodeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllTransactionsByUtilityCodeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllTransactionsByUtilityCodeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
